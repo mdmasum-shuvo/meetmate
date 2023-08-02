@@ -1,3 +1,4 @@
+import 'package:contactbook/theme/Colors.dart';
 import 'package:contactbook/theme/image_assets.dart';
 import 'package:contactbook/theme/text_theme.dart';
 import 'package:flutter/material.dart';
@@ -13,55 +14,75 @@ class LoginView extends GetView<LoginController> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body:  Column(
-        children: [
-          Align(
-            alignment: Alignment.center,
-            child: Image.asset(
-              login_logo,
-              height: 80.h,
-            ),
-          ),
-          Column(children: [
-            text_14_700("User Id"),
-
-            TextFormField(
-              keyboardType: TextInputType.text,
-              decoration: InputDecoration(
-                hintText: "Employee Code",
+    return SafeArea(
+      child: Scaffold(
+        body: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 24.0),
+          child: Column(
+            children: [
+              Flexible(
+                flex: 3,
+                child: Align(
+                  alignment: Alignment.center,
+                  child: Image.asset(
+                    login_logo,
+                    height: 46.h,
+                  ),
+                ),
               ),
-            ),
-            SizedBox(
-              height: 8.h,
-            ),
-            text_14_700("Password"),
-            TextFormField(
+              Obx(() => Flexible(
+                    flex: 5,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
+                        text_14_700("User Id"),
+                        SizedBox(
+                          height: 8.h,
+                        ),
+                        TextFormField(
+                          keyboardType: TextInputType.text,
+                          decoration: InputDecoration(
+                            hintText: "User Id",
+                          ),
+                        ),
+                        SizedBox(
+                          height: 16.h,
+                        ),
+                        text_14_700("Password"),
+                        SizedBox(
+                          height: 8.h,
+                        ),
+                        TextFormField(
+                          obscureText: controller.passwordVisible.value,
+                          decoration: InputDecoration(
+                              hintText: "*********",
+                              suffixIcon: IconButton(
+                                icon: Icon(
+                                  // Based on passwordVisible state choose the icon
+                                  controller.passwordVisible.value
+                                      ? Icons.visibility
+                                      : Icons.visibility_off,
+                                  color: Colors.grey,
+                                ),
+                                onPressed: () {
+                                  // Update the state i.e. toogle the state of passwordVisible variable
+                                  controller.passwordVisible.value =
+                                      !controller.passwordVisible.value;
+                                },
+                              )),
+                        ),
 
-              obscureText: true,
-              decoration: InputDecoration(
-                hintText: "Enter Password",
-              ),
-            ),
-            SizedBox(
-              height: 16.h,
-            ),
-            /*           GestureDetector(
-                    onTap: () {
-                      Get.toNamed(Routes.FORGET_PASSWORD);
-                    },
-                    child: Align(
-                      alignment: Alignment.topRight,
-                      child: text_12_400(
-                          "Forget Password", primaryDarkColor),
+                        SizedBox(
+                          height: 24.h,
+                        ),
+                        primaryButton("Login", () => {}),
+                      ],
                     ),
-                  ),*/
-            SizedBox(
-              height: 8.h,
-            ),
-            primaryButton("Login", () => {}),
-          ],)
-        ],
+                  ))
+            ],
+          ),
+        ),
       ),
     );
   }

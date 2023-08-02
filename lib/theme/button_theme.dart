@@ -7,38 +7,38 @@ import 'Colors.dart';
 
 Widget primaryButton(String text, Function() onPressed) {
   return SizedBox(
-    height: 48.h,
+    height: 40.h,
     width: double.infinity,
     child: ElevatedButton(
       style: ElevatedButton.styleFrom(
           primary: primaryDarkColor,
           elevation: 0,
           shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(12.r),
+              borderRadius: BorderRadius.circular(100.r),
               side: const BorderSide(color: primaryDarkColor))),
       onPressed: () {
         onPressed();
       },
-      child:text_16_400(text,Colors.white)
+      child:text_14_700(text,Colors.white)
     ),
   );
 }
 Widget whiteButton(String text, Function() onPressed) {
   return SizedBox(
-    height: 48.h,
+    height: 40.h,
     width: double.infinity,
     child: ElevatedButton(
       style: ElevatedButton.styleFrom(
           primary: Colors.white,
           elevation: 0,
           shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(12.r),
+              borderRadius: BorderRadius.circular(100.r),
               side: const BorderSide(color: secondaryColor))),
       onPressed: () {
         onPressed();
       },
       child:
-      text_16_700(text,secondaryColor)
+      text_14_700(text,secondaryColor)
     ),
   );
 }
