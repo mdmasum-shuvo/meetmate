@@ -44,7 +44,7 @@ Widget text_14_500(String? value,[Color color = textColor]){
 }
 
 Widget text_12_400(String? value,[Color color =textColor]){
-  return Text("$value",style:textTheme1.bodyLarge?.copyWith(color: color));
+  return Text("$value",style:textTheme1.bodyLarge?.copyWith(color: color),    overflow: TextOverflow.ellipsis);
 }
 
 Widget text_24_700(String? value,[Color color = textColor]){
