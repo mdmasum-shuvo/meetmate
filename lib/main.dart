@@ -56,8 +56,9 @@ Future<String> hasPreviousSession() async {
       //   // EasyLoading.showToast("Task Loaded"),
       // });
 
-      return Routes.HOME;
+     // return Routes.HOME;
     } else {
+      return Routes.LOGIN;
       return Routes.LOGIN;
     }
   }
