@@ -1,5 +1,6 @@
 import 'package:contactbook/app/modules/home/views/component/header.dart';
 import 'package:contactbook/app/modules/home/views/component/item_meeting_schedule.dart';
+import 'package:contactbook/theme/app_bar_home.dart';
 import 'package:contactbook/theme/button_theme.dart';
 import 'package:contactbook/theme/drawer.dart';
 import 'package:contactbook/theme/text_theme.dart';
@@ -17,10 +18,7 @@ class HomeView extends GetView<HomeController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('HomeView'),
-        centerTitle: true,
-      ),
+      appBar: mainAppBar("Home"),
       drawer: MainDrawer(),
       body: SingleChildScrollView(
         child: Column(

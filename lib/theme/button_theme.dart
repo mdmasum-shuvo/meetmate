@@ -23,13 +23,13 @@ Widget primaryButton(String text, Function() onPressed) {
 }
 
 Widget primaryButtonWithIcon(
-    String text, IconData iconData, Function() onPressed) {
+    String text, IconData iconData, Function() onPressed,[double radius=16]) {
   return SizedBox(
     child: Card(
       color: primaryDarkColor,
       shape: RoundedRectangleBorder(
         side: BorderSide(color: primaryDarkColor, width: 1),
-        borderRadius: BorderRadius.circular(16),
+        borderRadius: BorderRadius.circular(radius),
       ),
       child: Padding(
         padding: const EdgeInsets.symmetric(vertical: 16.0,horizontal: 16),

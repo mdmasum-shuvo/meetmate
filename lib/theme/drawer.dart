@@ -19,7 +19,7 @@ class MainDrawer extends StatelessWidget {
           ),
           ListTile(
             title: Text('Home'),
-           // tileColor: Get.currentRoute == Routes.HOME ? Colors.grey[300] : null,
+            tileColor: Get.currentRoute == Routes.HOME ? Colors.grey[300] : null,
             onTap: () {
               print(Get.currentRoute);
               Get.back();
@@ -28,10 +28,10 @@ class MainDrawer extends StatelessWidget {
           ),
           ListTile(
             title: Text('Contact List'),
-           // tileColor: Get.currentRoute == Routes.CONTACT_LIST  ? Colors.grey[300] : null,
+            tileColor: Get.currentRoute == Routes.CONTACT_LIST  ? Colors.grey[300] : null,
             onTap: () {
               Get.back();
-             // Get.offNamed(Routes.CONTACT_LIST );
+              Get.offNamed(Routes.CONTACT_LIST );
             },
           ),
           ListTile(
@@ -39,7 +39,7 @@ class MainDrawer extends StatelessWidget {
           //  tileColor: Get.currentRoute == Routes.PROFILE ? Colors.grey[300] : null,
             onTap: () {
               Get.back();
-             // Get.offNamed(Routes.PROFILE );
+              Get.offNamed(Routes.PROFILE );
             },
           ),
           ListTile(
