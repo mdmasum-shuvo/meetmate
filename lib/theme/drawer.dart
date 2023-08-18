@@ -34,6 +34,15 @@ class MainDrawer extends StatelessWidget {
               Get.offNamed(Routes.CONTACT_LIST );
             },
           ),
+
+          ListTile(
+            title: Text('My Schedule'),
+            tileColor: Get.currentRoute == Routes.MY_SCHEDULE  ? Colors.grey[300] : null,
+            onTap: () {
+              Get.back();
+              Get.offNamed(Routes.CONTACT_LIST );
+            },
+          ),
           ListTile(
             title: Text('My Profile'),
           //  tileColor: Get.currentRoute == Routes.PROFILE ? Colors.grey[300] : null,
