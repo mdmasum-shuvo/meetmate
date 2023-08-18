@@ -23,8 +23,8 @@ Widget recentContact(String data) {
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           SizedBox(
-            height: 88,
-            width: 88,
+            height: 72,
+            width: 72,
             child: loadNetworkImage(""),
           ),
           SizedBox(

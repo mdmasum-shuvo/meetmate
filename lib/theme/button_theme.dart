@@ -32,7 +32,7 @@ Widget primaryButtonWithIcon(
         borderRadius: BorderRadius.circular(16),
       ),
       child: Padding(
-        padding: const EdgeInsets.symmetric(vertical: 16.0),
+        padding: const EdgeInsets.symmetric(vertical: 16.0,horizontal: 16),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
