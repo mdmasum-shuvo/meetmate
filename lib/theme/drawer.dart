@@ -40,7 +40,7 @@ class MainDrawer extends StatelessWidget {
             tileColor: Get.currentRoute == Routes.MY_SCHEDULE  ? Colors.grey[300] : null,
             onTap: () {
               Get.back();
-              Get.offNamed(Routes.CONTACT_LIST );
+              Get.offNamed(Routes.MY_SCHEDULE );
             },
           ),
           ListTile(
