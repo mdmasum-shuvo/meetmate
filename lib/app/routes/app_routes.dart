@@ -8,6 +8,7 @@ abstract class Routes {
   static const PROFILE = _Paths.PROFILE;
   static const CONTACT_LIST = _Paths.CONTACT_LIST;
   static const MY_SCHEDULE = _Paths.MY_SCHEDULE;
+  static const CREATE_CONTACT = _Paths.CREATE_CONTACT;
 }
 
 abstract class _Paths {
@@ -17,4 +18,5 @@ abstract class _Paths {
   static const PROFILE = '/profile';
   static const CONTACT_LIST = '/contact-list';
   static const MY_SCHEDULE = '/my-schedule';
+  static const CREATE_CONTACT = '/create-contact';
 }
