@@ -4,6 +4,8 @@ import '../modules/contact_list/bindings/contact_list_binding.dart';
 import '../modules/contact_list/views/contact_list_view.dart';
 import '../modules/create_contact/bindings/create_contact_binding.dart';
 import '../modules/create_contact/views/create_contact_view.dart';
+import '../modules/create_schedule/bindings/create_schedule_binding.dart';
+import '../modules/create_schedule/views/create_schedule_view.dart';
 import '../modules/home/bindings/home_binding.dart';
 import '../modules/home/views/home_view.dart';
 import '../modules/login/bindings/login_binding.dart';
@@ -50,6 +52,11 @@ class AppPages {
       name: _Paths.CREATE_CONTACT,
       page: () => const CreateContactView(),
       binding: CreateContactBinding(),
+    ),
+    GetPage(
+      name: _Paths.CREATE_SCHEDULE,
+      page: () => const CreateScheduleView(),
+      binding: CreateScheduleBinding(),
     ),
   ];
 }

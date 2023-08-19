@@ -81,7 +81,7 @@ class CreateContactView extends GetView<CreateContactController> {
                     width: 8,
                   ),
                   Expanded(
-                    child: textField("Date of Birth", "enter date",
+                    child: dateField("Date of Birth", "enter date",
                         controller.emailPhoneController),
                   )
                 ],
