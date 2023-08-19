@@ -51,6 +51,35 @@ Widget primaryButtonWithIcon(
   );
 }
 
+Widget primaryButtonWhiteWithIcon(
+    String text, IconData iconData, Function() onPressed,[double radius=16]) {
+  return SizedBox(
+    child: Card(
+      color: Colors.white,
+      shape: RoundedRectangleBorder(
+        side: const BorderSide(color: textColor, width: 1),
+        borderRadius: BorderRadius.circular(radius),
+      ),
+      child: Padding(
+        padding: const EdgeInsets.symmetric(vertical: 16.0,horizontal: 16),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            Icon(
+              iconData,
+              color: textColor,
+            ),
+            const SizedBox(
+              width: 4,
+            ),
+            text_14_400(text, textColor)
+          ],
+        ),
+      ),
+    ),
+  );
+}
+
 Widget whiteButton(String text, Function() onPressed) {
   return SizedBox(
     height: 40.h,
