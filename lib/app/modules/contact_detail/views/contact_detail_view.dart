@@ -1,23 +1,20 @@
-import 'package:contactbook/app/modules/profile/views/component/text_view.dart';
-import 'package:contactbook/theme/Colors.dart';
-import 'package:contactbook/theme/app_bar_home.dart';
-import 'package:contactbook/theme/drawer.dart';
-import 'package:contactbook/theme/text_theme.dart';
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
 
+import '../../../../theme/Colors.dart';
+import '../../../../theme/custom_appbar.dart';
+import '../../../../theme/text_theme.dart';
 import '../../../utils/load_network_image.dart';
-import '../controllers/profile_controller.dart';
+import '../../profile/views/component/text_view.dart';
+import '../controllers/contact_detail_controller.dart';
 
-class ProfileView extends GetView<ProfileController> {
-  const ProfileView({Key? key}) : super(key: key);
-
+class ContactDetailView extends GetView<ContactDetailController> {
+  const ContactDetailView({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar:mainAppBar("My Profile",false),
-      drawer: MainDrawer(),
+      appBar:customAppbarWidget("Contact Detail"),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(
@@ -57,14 +54,14 @@ class ProfileView extends GetView<ProfileController> {
                       const Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                        Icon(Icons.call_outlined,color: textColor),
-                        SizedBox(width: 32,),
-                        Icon(Icons.email_outlined,color: textColor),
-                        SizedBox(width: 32,),
-                        Icon(Icons.language_outlined,color: textColor),
-                        SizedBox(width: 32,),
-                        Icon(Icons.location_on_outlined,color: textColor),
-                      ],)
+                          Icon(Icons.call_outlined,color: textColor),
+                          SizedBox(width: 32,),
+                          Icon(Icons.email_outlined,color: textColor),
+                          SizedBox(width: 32,),
+                          Icon(Icons.language_outlined,color: textColor),
+                          SizedBox(width: 32,),
+                          Icon(Icons.location_on_outlined,color: textColor),
+                        ],)
 
                     ],
                   ),

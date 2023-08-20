@@ -4,6 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 
+import 'image_assets.dart';
+
 class MainDrawer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -12,22 +14,25 @@ class MainDrawer extends StatelessWidget {
         padding: EdgeInsets.zero,
         children: <Widget>[
           DrawerHeader(
-            child: Text('Drawer Header'),
-            decoration: BoxDecoration(
+            decoration: const BoxDecoration(
               color: Colors.blue,
+            ),
+            child: Padding(
+              padding: const EdgeInsets.all(40.0),
+              child: Center(child: Image.asset(logoWhite)),
             ),
           ),
           ListTile(
-            title: Text('Home'),
+            title: const Text('Home'),
             tileColor: Get.currentRoute == Routes.HOME ? Colors.grey[300] : null,
             onTap: () {
               print(Get.currentRoute);
               Get.back();
-           //   Get.offNamed(Routes.HOME);
+              Get.offNamed(Routes.HOME);
             },
           ),
           ListTile(
-            title: Text('Contact List'),
+            title: const Text('Contact List'),
             tileColor: Get.currentRoute == Routes.CONTACT_LIST  ? Colors.grey[300] : null,
             onTap: () {
               Get.back();
@@ -36,7 +41,7 @@ class MainDrawer extends StatelessWidget {
           ),
 
           ListTile(
-            title: Text('My Schedule'),
+            title: const Text('My Schedule'),
             tileColor: Get.currentRoute == Routes.MY_SCHEDULE  ? Colors.grey[300] : null,
             onTap: () {
               Get.back();
@@ -44,7 +49,7 @@ class MainDrawer extends StatelessWidget {
             },
           ),
           ListTile(
-            title: Text('My Profile'),
+            title: const Text('My Profile'),
           //  tileColor: Get.currentRoute == Routes.PROFILE ? Colors.grey[300] : null,
             onTap: () {
               Get.back();
@@ -52,7 +57,7 @@ class MainDrawer extends StatelessWidget {
             },
           ),
           ListTile(
-            title: Text('Logout'),
+            title: const Text('Logout'),
             tileColor: Get.currentRoute == '/page2' ? Colors.grey[300] : null,
             onTap: () {
               Get.back();

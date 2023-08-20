@@ -24,27 +24,30 @@ Widget primaryButton(String text, Function() onPressed) {
 
 Widget primaryButtonWithIcon(
     String text, IconData iconData, Function() onPressed,[double radius=16]) {
-  return SizedBox(
-    child: Card(
-      color: primaryDarkColor,
-      shape: RoundedRectangleBorder(
-        side: BorderSide(color: primaryDarkColor, width: 1),
-        borderRadius: BorderRadius.circular(radius),
-      ),
-      child: Padding(
-        padding: const EdgeInsets.symmetric(vertical: 16.0,horizontal: 16),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            Icon(
-              iconData,
-              color: Colors.white,
-            ),
-            const SizedBox(
-              width: 4,
-            ),
-            text_14_400(text, Colors.white)
-          ],
+  return GestureDetector(
+    onTap: onPressed,
+    child: SizedBox(
+      child: Card(
+        color: primaryDarkColor,
+        shape: RoundedRectangleBorder(
+          side: const BorderSide(color: primaryDarkColor, width: 1),
+          borderRadius: BorderRadius.circular(radius),
+        ),
+        child: Padding(
+          padding: const EdgeInsets.symmetric(vertical: 16.0,horizontal: 16),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              Icon(
+                iconData,
+                color: Colors.white,
+              ),
+              const SizedBox(
+                width: 4,
+              ),
+              text_14_400(text, Colors.white)
+            ],
+          ),
         ),
       ),
     ),
@@ -53,27 +56,30 @@ Widget primaryButtonWithIcon(
 
 Widget primaryButtonWhiteWithIcon(
     String text, IconData iconData, Function() onPressed,[double radius=16]) {
-  return SizedBox(
-    child: Card(
-      color: Colors.white,
-      shape: RoundedRectangleBorder(
-        side: const BorderSide(color: textColor, width: 1),
-        borderRadius: BorderRadius.circular(radius),
-      ),
-      child: Padding(
-        padding: const EdgeInsets.symmetric(vertical: 16.0,horizontal: 16),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            Icon(
-              iconData,
-              color: textColor,
-            ),
-            const SizedBox(
-              width: 4,
-            ),
-            text_14_400(text, textColor)
-          ],
+  return GestureDetector(
+    onTap: onPressed,
+    child: SizedBox(
+      child: Card(
+        color: Colors.white,
+        shape: RoundedRectangleBorder(
+          side: const BorderSide(color: textColor, width: 1),
+          borderRadius: BorderRadius.circular(radius),
+        ),
+        child: Padding(
+          padding: const EdgeInsets.symmetric(vertical: 16.0,horizontal: 16),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              Icon(
+                iconData,
+                color: textColor,
+              ),
+              const SizedBox(
+                width: 4,
+              ),
+              text_14_400(text, textColor)
+            ],
+          ),
         ),
       ),
     ),

@@ -1,3 +1,4 @@
+
 import 'package:contactbook/theme/text_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -32,7 +33,7 @@ AppBar customAppbarWidgetDashboard() {
   );
 }
 
-AppBar mainAppBar(String title) {
+AppBar mainAppBar(String title,[bool isSearchVisible=true]) {
   return AppBar(
     // Set this height
     elevation: 0,
@@ -47,6 +48,7 @@ AppBar mainAppBar(String title) {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [text_16_700(title, Colors.white)],
           ),
+          if(isSearchVisible)
           Padding(
             padding: EdgeInsets.only(right: 20.w),
             child: const Row(children: [

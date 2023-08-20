@@ -1,5 +1,6 @@
 import 'package:contactbook/app/modules/home/views/component/header.dart';
 import 'package:contactbook/app/modules/home/views/component/item_meeting_schedule.dart';
+import 'package:contactbook/app/routes/app_pages.dart';
 import 'package:contactbook/theme/app_bar_home.dart';
 import 'package:contactbook/theme/button_theme.dart';
 import 'package:contactbook/theme/drawer.dart';
@@ -54,11 +55,13 @@ class HomeView extends GetView<HomeController> {
                 children: [
                   Expanded(
                       child: primaryButtonWithIcon(
-                          "New Contact", Icons.add, () => null)),
+                          "New Contact", Icons.add, () =>
+                      {Get.toNamed(Routes.CREATE_CONTACT)})),
                   SizedBox(width: 16,),
                   Expanded(
                       child: primaryButtonWithIcon("New Meeting",
-                          Icons.calendar_month_outlined, () => null))
+                          Icons.calendar_month_outlined, () =>
+                          {Get.toNamed(Routes.CREATE_SCHEDULE)}))
                 ],
               ),
             )
