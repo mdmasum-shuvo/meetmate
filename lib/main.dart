@@ -62,7 +62,7 @@ Future<String> hasPreviousSession() async {
       return Routes.LOGIN;
     }
   }
-  return Routes.PROFILE;
+  return Routes.LOGIN;
 }
 
 class MyApp extends StatelessWidget {

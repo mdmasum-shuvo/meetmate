@@ -1,3 +1,4 @@
+import 'package:contactbook/app/routes/app_pages.dart';
 import 'package:contactbook/theme/Colors.dart';
 import 'package:contactbook/theme/image_assets.dart';
 import 'package:contactbook/theme/text_theme.dart';
@@ -76,7 +77,7 @@ class LoginView extends GetView<LoginController> {
                         SizedBox(
                           height: 24.h,
                         ),
-                        primaryButton("Login", () => {}),
+                        primaryButton("Login", () => {Get.toNamed(Routes.HOME)}),
                       ],
                     ),
                   ))
