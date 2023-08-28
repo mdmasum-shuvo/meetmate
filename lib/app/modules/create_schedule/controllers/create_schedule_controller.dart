@@ -1,4 +1,5 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class CreateScheduleController extends GetxController {
@@ -6,6 +7,11 @@ class CreateScheduleController extends GetxController {
   RxList<String> listDepartmentStr = <String>[].obs;
   final emailPhoneController = TextEditingController(text: "");
   RxList<String> priorityStr = <String>["High","Medium","Low"].obs;
+  var selectedDate = DateTime.now().obs;
+  var selectedTime = TimeOfDay.now().obs;
+  TextEditingController textEditingController=TextEditingController();
+
+
 
   final count = 0.obs;
   @override
