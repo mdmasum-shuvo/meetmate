@@ -29,7 +29,7 @@ class MyScheduleView extends GetView<MyScheduleController> {
                   CalendarFormat.month: 'Month',
                 },
                 selectedDayPredicate: (day){
-                  return  isSameDay(controller.selectedDay, day);
+                  return  isSameDay(controller.selectedDay.value, day);
                 },
               ),
             ),

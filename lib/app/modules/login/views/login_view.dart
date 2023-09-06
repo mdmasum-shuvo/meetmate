@@ -42,6 +42,7 @@ class LoginView extends GetView<LoginController> {
                           height: 8.h,
                         ),
                         TextFormField(
+                          controller: controller.emailPhoneController,
                           keyboardType: TextInputType.text,
                           decoration: InputDecoration(
                             hintText: "User Id",
@@ -55,6 +56,7 @@ class LoginView extends GetView<LoginController> {
                           height: 8.h,
                         ),
                         TextFormField(
+                          controller: controller.passwordController,
                           obscureText: controller.passwordVisible.value,
                           decoration: InputDecoration(
                               hintText: "*********",
@@ -77,7 +79,7 @@ class LoginView extends GetView<LoginController> {
                         SizedBox(
                           height: 24.h,
                         ),
-                        primaryButton("Login", () => {Get.toNamed(Routes.HOME)}),
+                        primaryButton("Login", () => {controller.login()}),
                       ],
                     ),
                   ))
