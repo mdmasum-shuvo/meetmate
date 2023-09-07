@@ -14,12 +14,12 @@ class HomeProvider extends GetConnect {
   }
 
   Future<ScheduleResponse> getScheduleList() async {
-    var url = "${Constants.baseUrl}/schedule_list";
+    var url = "${Constants.baseUrl}schedule_list";
     Map<String, String?> qParams = {
       'company_id': null,
     };
     print("login url $url");
-    final response = await get(url,headers: Constants.headers);
+    final response = await post(url,{},headers: Constants.headers);
     if (response.status.hasError) {
       String message = "Something went wrong!";
       try {

@@ -45,10 +45,10 @@ class LoginController extends GetxController {
       if (response.status == 200) {
         EasyLoading.dismiss();
 
-        Constants.token=response.token!;
+        Constants.token="Bearer ${response.token!}";
         Constants.headers = {
           "Accept": "application/json",
-          "token": Constants.token
+          "Authorization": Constants.token
         };
         Get.offNamed(Routes.HOME);
       }else{

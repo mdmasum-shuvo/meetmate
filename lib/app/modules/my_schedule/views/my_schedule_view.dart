@@ -41,7 +41,7 @@ class MyScheduleView extends GetView<MyScheduleController> {
                   physics: NeverScrollableScrollPhysics(),
                   itemCount: 10,
                   itemBuilder: (context, index) {
-                    return  itemMeetingSchedule();
+                    return  Container();
                   },
                 ),
               ),

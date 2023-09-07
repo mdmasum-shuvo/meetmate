@@ -77,14 +77,14 @@ class HomeView extends GetView<HomeController> {
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 16.0),
               child: SizedBox(
-                child: ListView.builder(
+                child: Obx(() => ListView.builder(
                   shrinkWrap: true,
                   physics: NeverScrollableScrollPhysics(),
-                  itemCount: 10,
+                  itemCount: controller.scheduleList.value.data?.length,
                   itemBuilder: (context, index) {
-                    return  itemMeetingSchedule();
+                    return  itemMeetingSchedule(controller.scheduleList.value.data![index]);
                   },
-                ),
+                )),
               ),
             ),
 
