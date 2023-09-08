@@ -20,12 +20,12 @@ class ContactListView extends GetView<ContactListController> {
         children: [
           Padding(
             padding: const EdgeInsets.all(16.0),
-            child: ListView.builder(
-              itemCount: 10,
+            child: Obx(() => ListView.builder(
+              itemCount: controller.list.value.data?.length!,
               itemBuilder: (context, index) {
-                return contactItem();
+                return contactItem(controller.list.value.data![index]!);
               },
-            ),
+            )),
           ),
           Padding(
             padding: const EdgeInsets.only(right: 22.0, bottom: 30),

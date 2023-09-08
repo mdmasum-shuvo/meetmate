@@ -9,7 +9,7 @@ import 'package:google_fonts/google_fonts.dart';
 
 import 'Colors.dart';
 
-Widget dropDown(String title, RxList<String> listDepartmentStr,
+Widget dropDown(String title,String hints, RxList<String> listDepartmentStr,
     Function(String value) onChange) {
   return Column(
     crossAxisAlignment: CrossAxisAlignment.start,
@@ -24,8 +24,8 @@ Widget dropDown(String title, RxList<String> listDepartmentStr,
           elevation: 16,
           style: textTheme1.titleMedium?.copyWith(
               fontSize: 14.sp, fontWeight: FontWeight.w400, color: textColor),
-          decoration: const InputDecoration(
-            hintText: "",
+          decoration:  InputDecoration(
+            hintText: hints,
           ),
           onChanged: (String? value) {
             onChange(value ?? "");

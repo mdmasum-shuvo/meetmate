@@ -1,20 +1,17 @@
+
 import 'dart:convert';
 
-import 'package:contactbook/app/modules/profile/model/ProfileResponse.dart';
-import 'package:get/get.dart';
+import 'package:contactbook/app/utils/utils.dart';
+import 'package:get/get_connect/connect.dart';
 
-import '../../../utils/constants.dart';
-import '../../../utils/error/ErrorResponse.dart';
-import '../../../utils/utils.dart';
+import '../modules/create_contact/model/CompanyTypeResponse.dart';
+import 'constants.dart';
+import 'error/ErrorResponse.dart';
 
-class ProfileProvider extends GetConnect {
-  @override
-  void onInit() {
-    httpClient.baseUrl = 'YOUR-API-URL';
-  }
+class SettingProvider extends GetConnect {
 
-  Future<ProfileResponse> getProfile() async {
-    var url = "${Constants.baseUrl}profile";
+  Future<CompanyTypeResponse> getCompanyType() async {
+    var url = "${Constants.baseUrl}company_type";
     Map<String, String?> qParams = {
       'company_id': null,
     };
@@ -34,7 +31,7 @@ class ProfileProvider extends GetConnect {
     } else {
       print(response.body);
 
-      return ProfileResponse.fromJson(jsonDecode(response.bodyString!));
+      return CompanyTypeResponse.fromJson(jsonDecode(response.bodyString!));
     }
   }
 

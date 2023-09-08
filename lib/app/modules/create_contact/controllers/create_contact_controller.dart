@@ -1,17 +1,26 @@
+import 'package:contactbook/app/modules/create_contact/model/CompanyTypeResponse.dart';
+import 'package:contactbook/app/utils/setting_provider.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:get/get.dart';
+
+import '../../../../theme/Colors.dart';
+import '../../../utils/snackbar.dart';
 
 class CreateContactController extends GetxController {
   //TODO: Implement CreateContactController
 
+  SettingProvider _settingProvider=SettingProvider();
   final count = 0.obs;
   final emailPhoneController = TextEditingController(text: "");
-  RxList<String> listDepartmentStr = <String>[].obs;
   RxList<String> genderStr = <String>["Male","Female"].obs;
   RxList<String> priorityStr = <String>["High","Medium","Low"].obs;
   RxList<String> statusStr = <String>["Active","Inactive"].obs;
   RxList<String> natureStr = <String>["Good","Bad"].obs;
-
+  RxList<String> listCompanyName = <String>[].obs;
+  RxList<String> listCompanyId = <String>[].obs;
+  Rx<CompanyTypeResponse> companyTypeList =
+      CompanyTypeResponse(data: List.empty()).obs;
   @override
   void onInit() {
     super.onInit();
@@ -20,6 +29,7 @@ class CreateContactController extends GetxController {
   @override
   void onReady() {
     super.onReady();
+    getCompanyType();
   }
 
   @override
@@ -27,5 +37,40 @@ class CreateContactController extends GetxController {
     super.onClose();
   }
 
+  void getCompanyType() async {
+    // EasyLoading.show();
+    _settingProvider.getCompanyType().then((response) async {
+      print(RxStatus.success().toString());
+      if (response.data != null) {
+        companyTypeList.value = response;
+        //department.value = departmentList.value!.data![0].departmentName!;
+        setCompanyTypeData();
+        //getDesignation();
+        EasyLoading.dismiss();
+      } else {
+        //getDesignation();
+
+         EasyLoading.dismiss();
+        getxSnackbar("", "No Data Found!", red);
+      }
+    });
+  }
+
+
   void increment() => count.value++;
+
+  void setCompanyTypeData() async {
+    List<String> listStr = [];
+    List<String> listIds = [];
+
+    //listStr.add("Select Company Type");
+
+    for (int i = 0; i < companyTypeList.value.data!.length; i++) {
+      listStr.add(companyTypeList.value.data![i].companyType!);
+      listIds.add(companyTypeList.value.data![i].id.toString());
+    }
+
+    listCompanyName.value = listStr;
+    listCompanyId.value = listIds;
+  }
 }

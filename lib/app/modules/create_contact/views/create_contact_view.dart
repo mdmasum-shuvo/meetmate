@@ -28,7 +28,7 @@ class CreateContactView extends GetView<CreateContactController> {
                   controller.emailPhoneController),
               textField("Company Name", "enter company name",
                   controller.emailPhoneController),
-              dropDown("Company Type", controller.listDepartmentStr,
+              dropDown("Company Type","Select Company Type", controller.listCompanyName,
                   (String value) {}),
               textField("Phone No.", "enter Phone No.",
                   controller.emailPhoneController),
@@ -45,7 +45,7 @@ class CreateContactView extends GetView<CreateContactController> {
                     child: textField("City", "enter City name",
                         controller.emailPhoneController),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     width: 8,
                   ),
                   Expanded(
@@ -75,7 +75,7 @@ class CreateContactView extends GetView<CreateContactController> {
                 children: [
                   Expanded(
                     child: dropDown(
-                        "Gender", controller.genderStr, (String value) {}),
+                        "Gender", "",controller.genderStr, (String value) {}),
                   ),
                   SizedBox(
                     width: 8,
@@ -86,12 +86,12 @@ class CreateContactView extends GetView<CreateContactController> {
                   )
                 ],
               ),
-              dropDown("Priority Level", controller.priorityStr,
+              dropDown("Priority Level","", controller.priorityStr,
                   (String value) {}),
               dropDown(
-                  "Status", controller.statusStr, (String value) {}),
+                  "Status","", controller.statusStr, (String value) {}),
               dropDown(
-                  "Nature", controller.natureStr, (String value) {}),
+                  "Nature","", controller.natureStr, (String value) {}),
               textField(
                   "Deal Amount", "enter amount", controller.emailPhoneController),
             ],

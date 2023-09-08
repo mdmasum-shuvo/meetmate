@@ -1,14 +1,13 @@
+import 'package:contactbook/app/modules/contact_list/model/ContactListResponse.dart';
 import 'package:contactbook/app/routes/app_pages.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
-
 import '../../../../../theme/colors.dart';
 import '../../../../../theme/text_theme.dart';
 import '../../../../utils/load_network_image.dart';
 
-Widget contactItem() {
+Widget contactItem(Data data) {
   return GestureDetector(
     onTap:()=>{Get.toNamed(Routes.CONTACT_DETAIL)} ,
     child: Padding(
@@ -34,7 +33,7 @@ Widget contactItem() {
                     child: SizedBox(
                       height: 72,
                       width: 72,
-                      child: loadNetworkImage(""),
+                      child: loadNetworkImage(data.photo??""),
                     ),
                   ),
                   SizedBox(width: 8,),
@@ -42,9 +41,9 @@ Widget contactItem() {
                     mainAxisAlignment: MainAxisAlignment.start,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      text_14_700("Jake Nackos"),
-                      text_12_400("Marketing Manager"),
-                      text_12_400("OS Corp"),
+                      text_14_700(data.clientName??""),
+                      text_12_400(data.designation??""),
+                      text_12_400(data.company?.companyName??""),
                     ],
                   ),
                 ],

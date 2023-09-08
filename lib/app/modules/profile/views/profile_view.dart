@@ -20,7 +20,7 @@ class ProfileView extends GetView<ProfileController> {
       drawer: MainDrawer(),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
-        child: Column(
+        child:Obx(() =>  Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             SizedBox(
@@ -45,26 +45,26 @@ class ProfileView extends GetView<ProfileController> {
                         child: SizedBox(
                           height: 104,
                           width: 104,
-                          child: loadNetworkImage(""),
+                          child: loadNetworkImage(controller.profileData.value.data?[0].photo??""),
                         ),
                       ),
                       const SizedBox(height:16 ,),
-                      text_16_700("Masum Talukder"),
-                      text_14_400("Chief Executive Officer"),
-                      text_14_400("Shohay Health"),
+                      text_16_700(controller.profileData.value.data?[0].name??""),
+                      text_14_400(controller.profileData.value.data?[0].designationName??""),
+                      text_14_400(controller.profileData.value.data?[0].companyName??""),
                       SizedBox(height: 16,),
 
                       const Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                        Icon(Icons.call_outlined,color: textColor),
-                        SizedBox(width: 32,),
-                        Icon(Icons.email_outlined,color: textColor),
-                        SizedBox(width: 32,),
-                        Icon(Icons.language_outlined,color: textColor),
-                        SizedBox(width: 32,),
-                        Icon(Icons.location_on_outlined,color: textColor),
-                      ],)
+                          Icon(Icons.call_outlined,color: textColor),
+                          SizedBox(width: 32,),
+                          Icon(Icons.email_outlined,color: textColor),
+                          SizedBox(width: 32,),
+                          Icon(Icons.language_outlined,color: textColor),
+                          SizedBox(width: 32,),
+                          Icon(Icons.location_on_outlined,color: textColor),
+                        ],)
 
                     ],
                   ),
@@ -72,12 +72,12 @@ class ProfileView extends GetView<ProfileController> {
               ),
             ),
             const SizedBox(height: 24,),
-            textViewItem("Phone", "01680021468"),
-            textViewItem("Email ID", "khalid@shohay.health"),
-            textViewItem("Website", "www.shohay.health"),
+            textViewItem("Phone", controller.profileData.value.data?[0].email??""),
+            textViewItem("Email ID", controller.profileData.value.data?[0].email??""),
+            textViewItem("Website", controller.profileData.value.data?[0].website??''),
             textViewItem("Address", "1 Hacker Way, Menlo Park, California, 94025, US"),
           ],
-        ),
+        )),
       ),
     );
   }

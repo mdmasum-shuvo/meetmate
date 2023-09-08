@@ -1,6 +1,5 @@
 import 'package:contactbook/app/modules/home/model/ScheduleResponse.dart';
 import 'package:contactbook/theme/text_theme.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../../theme/colors.dart';
@@ -10,7 +9,7 @@ Widget itemMeetingSchedule(Data data) {
     padding: const EdgeInsets.only(bottom: 12),
     child: Card(
       shape: RoundedRectangleBorder(
-        side: BorderSide(color: Colors.white, width: 1),
+        side: const BorderSide(color: Colors.white, width: 1),
         borderRadius: BorderRadius.circular(16),
       ),
       child: Padding(
@@ -24,9 +23,8 @@ Widget itemMeetingSchedule(Data data) {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   text_14_700(data.title??""),
-                  text_12_400(data.agenda??""),
-                  text_12_400(data.meetingLink),
-                  text_12_400("${data.meetingDate!}"),
+                  text_12_400(data.meetingLocation??""),
+                  text_12_400(data.meetingDate??""),
                 ],
               ),
             ),
