@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:contactbook/app/modules/create_contact/model/CompanyResponse.dart';
 import 'package:contactbook/app/modules/create_contact/model/CompanyTypeResponse.dart';
+import 'package:contactbook/app/modules/create_contact/model/DefaultResponse.dart';
 import 'package:get/get.dart';
 
 import '../../../utils/constants.dart';
@@ -38,6 +39,35 @@ class CreateContactProvider extends GetConnect {
       return CompanyResponse.fromJson(jsonDecode(response.bodyString!));
     }
   }
+
+
+  Future<DefaultResponse> createContact(Map<String, String?> qParams) async {
+    var url = "${Constants.baseUrl}contact_add";
+    Map<String, String?> qParams = {
+      'client_name': "Masum Talukder",
+    };
+
+    //param(qParams);
+    print("login url $url");
+    final response = await post(url,{},headers: Constants.headers);
+    if (response.status.hasError) {
+      String message = "Something went wrong!";
+      try {
+        message =
+        ErrorResponse.fromJson(jsonDecode(response.bodyString!)).message!;
+      } catch (e) {
+        print(e);
+      }
+
+      Utils.showProviderError(response.statusCode, message);
+      return Future.error(response.bodyString!);
+    } else {
+      print(response.body);
+
+      return DefaultResponse.fromJson(jsonDecode(response.bodyString!));
+    }
+  }
+
 
 
 
