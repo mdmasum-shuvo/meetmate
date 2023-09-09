@@ -12,18 +12,19 @@ import '../../../utils/snackbar.dart';
 class CreateContactController extends GetxController {
   //TODO: Implement CreateContactController
 
-  SettingProvider _settingProvider=SettingProvider();
-  CreateContactProvider _provider=CreateContactProvider();
+  SettingProvider _settingProvider = SettingProvider();
+  CreateContactProvider _provider = CreateContactProvider();
   final count = 0.obs;
   final emailPhoneController = TextEditingController(text: "");
-  RxList<String> genderStr = <String>["Male","Female"].obs;
-  RxList<String> priorityStr = <String>["High","Medium","Low"].obs;
-  RxList<String> statusStr = <String>["Active","Inactive"].obs;
-  RxList<String> natureStr = <String>["Good","Bad"].obs;
+  RxList<String> genderStr = <String>["Male", "Female"].obs;
+  RxList<String> priorityStr = <String>["High", "Medium", "Low"].obs;
+  RxList<String> statusStr = <String>["Active", "Inactive"].obs;
+  RxList<String> natureStr = <String>["Good", "Bad"].obs;
   RxList<String> listCompanyName = <String>[].obs;
   RxList<String> listCompanyId = <String>[].obs;
   Rx<CompanyTypeResponse> companyTypeList =
       CompanyTypeResponse(data: List.empty()).obs;
+
   @override
   void onInit() {
     super.onInit();
@@ -53,12 +54,13 @@ class CreateContactController extends GetxController {
       } else {
         //getDesignation();
 
-         EasyLoading.dismiss();
+        EasyLoading.dismiss();
         getxSnackbar("", "No Data Found!", red);
       }
     });
   }
-  void createContact(){
+
+  void createContact() {
     Map<String, String?> qParams = {
       'client_name': "Masum Talukder",
       'designation': "Software Engineer",
@@ -79,11 +81,11 @@ class CreateContactController extends GetxController {
       'nature': "1",
       'deal_amount': "100000",
     };
-
+    EasyLoading.show();
     _provider.createContact(qParams).then((response) async {
       print(RxStatus.success().toString());
       if (response.status == 200) {
-        getxSnackbar("", response.message??"", Colors.green);
+        getxSnackbar("", response.message ?? "", Colors.green);
         EasyLoading.dismiss();
       } else {
         EasyLoading.dismiss();
@@ -91,7 +93,6 @@ class CreateContactController extends GetxController {
       }
     });
   }
-
 
   void increment() => count.value++;
 

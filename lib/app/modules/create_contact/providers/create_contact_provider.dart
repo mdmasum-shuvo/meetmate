@@ -43,13 +43,11 @@ class CreateContactProvider extends GetConnect {
 
   Future<DefaultResponse> createContact(Map<String, String?> qParams) async {
     var url = "${Constants.baseUrl}contact_add";
-    Map<String, String?> qParams = {
-      'client_name': "Masum Talukder",
-    };
+
 
     //param(qParams);
     print("login url $url");
-    final response = await post(url,{},headers: Constants.headers);
+    final response = await post(url,qParams,headers: Constants.headers);
     if (response.status.hasError) {
       String message = "Something went wrong!";
       try {

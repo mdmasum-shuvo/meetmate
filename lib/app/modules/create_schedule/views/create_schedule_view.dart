@@ -52,7 +52,7 @@ class CreateScheduleView extends GetView<CreateScheduleController> {
                         child: timeField("Start time", "enter time",
                             controller.emailPhoneController),
                       ),
-                      SizedBox(
+                      const SizedBox(
                         width: 8,
                       ),
                       Expanded(
@@ -65,10 +65,11 @@ class CreateScheduleView extends GetView<CreateScheduleController> {
                       (String value) {}),
                   textField("Meeting Link", "enter meeting link",
                       controller.emailPhoneController),
-                  dropDown("Priority Level","", controller.listDepartmentStr,
+                  dropDown("Priority Level","", controller.priorityStr,
                       (String value) {}),
                   textField("Agenda", "enter meeting agenda",
                       controller.emailPhoneController),
+                  const SizedBox(height: 60,)
                 ],
               ),
             ),
