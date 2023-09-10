@@ -11,6 +11,8 @@ class ContactListController extends GetxController {
   Rx<ContactListResponse> list = ContactListResponse(data: List.empty()).obs;
   final ContactListProvider _provider = ContactListProvider();
   final count = 0.obs;
+  RxList<String> contactListStr = <String>[].obs;
+
   @override
   void onInit() {
     super.onInit();
@@ -38,6 +40,7 @@ class ContactListController extends GetxController {
       if (response.data != null) {
         EasyLoading.dismiss();
         list.value = response;
+        convertContactList();
       } else {
         EasyLoading.dismiss();
         getxSnackbar("", "No Data Found!", red);
@@ -45,5 +48,10 @@ class ContactListController extends GetxController {
       }
     });
   }
-
+  void convertContactList() {
+    for (int i = 0; i < list.value.data!.length; i++) {
+      int number=i+1;
+      contactListStr.add( "${number}. ${list.value.data![i].clientName}");
+    }
+  }
 }

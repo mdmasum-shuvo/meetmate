@@ -1,3 +1,6 @@
+import 'dart:ffi';
+
+import 'package:contactbook/app/modules/contact_list/controllers/contact_list_controller.dart';
 import 'package:contactbook/theme/dropdown.dart';
 import 'package:flutter/material.dart';
 
@@ -9,7 +12,9 @@ import '../../../../theme/textfield.dart';
 import '../controllers/create_schedule_controller.dart';
 
 class CreateScheduleView extends GetView<CreateScheduleController> {
-  const CreateScheduleView({Key? key}) : super(key: key);
+
+   const CreateScheduleView({Key? key}) : super(key: key);
+
 
   @override
   Widget build(BuildContext context) {
@@ -22,11 +27,13 @@ class CreateScheduleView extends GetView<CreateScheduleController> {
             SingleChildScrollView(
               child: Column(
                 children: [
-                  textField("Client Name", "enter client name",
-                      controller.emailPhoneController),
-                  dropDown("Company Name","", controller.listDepartmentStr,
-                      (String value) {}),
-                  dropDown("Client Name","", controller.listDepartmentStr,
+                  textField("Title", "enter client name",
+                      controller.titleController),
+                  dropDown("Company Name","", controller.companyListStr,
+                      (String value) {
+                    print("company name: $value");
+                      }),
+                  dropDown("Client Name","", controller.contactListStr,
                       (String value) {}),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -43,39 +50,39 @@ class CreateScheduleView extends GetView<CreateScheduleController> {
                   SizedBox(
                     height: 12,
                   ),
-                  dateField("Date of Birth", "enter date",
-                      controller.emailPhoneController),
+                  dateField("Date", "enter date",
+                      controller.dateController),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Expanded(
                         child: timeField("Start time", "enter time",
-                            controller.emailPhoneController),
+                            controller.startTimeController),
                       ),
                       const SizedBox(
                         width: 8,
                       ),
                       Expanded(
                         child: timeField("End time", "enter time",
-                            controller.emailPhoneController),
+                            controller.endTimeController),
                       ),
                     ],
                   ),
-                  dropDown("Location","", controller.listDepartmentStr,
+                  dropDown("Location","", controller.locationStr,
                       (String value) {}),
                   textField("Meeting Link", "enter meeting link",
-                      controller.emailPhoneController),
+                      controller.meetingLinkController),
                   dropDown("Priority Level","", controller.priorityStr,
                       (String value) {}),
                   textField("Agenda", "enter meeting agenda",
-                      controller.emailPhoneController),
+                      controller.agendaController),
                   const SizedBox(height: 60,)
                 ],
               ),
             ),
             Align(
                 alignment: Alignment.bottomRight,
-                child: primaryButton("Save", () => null))
+                child: primaryButton("Save", () => controller.createSchedule()))
           ],
         ),
       ),

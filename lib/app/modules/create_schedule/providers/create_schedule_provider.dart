@@ -2,10 +2,10 @@ import 'dart:convert';
 
 import 'package:get/get.dart';
 
-import '../../../utils/DefaultResponse.dart';
 import '../../../utils/constants.dart';
 import '../../../utils/error/ErrorResponse.dart';
 import '../../../utils/utils.dart';
+import '../../create_contact/model/DefaultResponse.dart';
 
 class CreateScheduleProvider extends GetConnect {
   @override

@@ -26,34 +26,34 @@ class CreateContactView extends GetView<CreateContactController> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   textField("Client Name", "enter client name",
-                      controller.emailPhoneController),
+                      controller.clientNameController),
                   textField("Designation", "enter designation",
-                      controller.emailPhoneController),
-                  textField("Company Name", "enter company name",
-                      controller.emailPhoneController),
-                  dropDown("Company Type","Select Company Type", controller.listCompanyName,
+                      controller.designationController),
+                  dropDown("Company Name","Select Company Name", controller.listCompanyName,
+                          (String value) {}),
+                  dropDown("Company Type","Select Company Type", controller.listCompanyTypeName,
                           (String value) {}),
                   textField("Phone No.", "enter Phone No.",
-                      controller.emailPhoneController),
+                      controller.phoneNumberController),
                   textField(
-                      "Email ID", "enter email", controller.emailPhoneController),
+                      "Email ID", "enter email", controller.emailController),
                   textField("Website", "enter website address:www.example.com",
-                      controller.emailPhoneController),
+                      controller.websiteController),
                   textField(
-                      "Address", "enter address", controller.emailPhoneController),
+                      "Address", "enter address", controller.addressController),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Expanded(
                         child: textField("City", "enter City name",
-                            controller.emailPhoneController),
+                            controller.cityController),
                       ),
                       const SizedBox(
                         width: 8,
                       ),
                       Expanded(
                         child: textField("State", "enter State name",
-                            controller.emailPhoneController),
+                            controller.stateController),
                       )
                     ],
                   ),
@@ -62,14 +62,14 @@ class CreateContactView extends GetView<CreateContactController> {
                     children: [
                       Expanded(
                         child: textField("Zip/Post Code", "enter Zip/postal code",
-                            controller.emailPhoneController),
+                            controller.zipController),
                       ),
                       SizedBox(
                         width: 8,
                       ),
                       Expanded(
-                        child: textField("Country", "enter country name",
-                            controller.emailPhoneController),
+                        child: dropDown("Country","Select Country", controller.listCountryName,
+                                (String value) {}),
                       )
                     ],
                   ),
@@ -85,7 +85,7 @@ class CreateContactView extends GetView<CreateContactController> {
                       ),
                       Expanded(
                         child: dateField("Date of Birth", "enter date",
-                            controller.emailPhoneController),
+                            controller.dobController),
                       )
                     ],
                   ),
@@ -96,7 +96,7 @@ class CreateContactView extends GetView<CreateContactController> {
                   dropDown(
                       "Nature","", controller.natureStr, (String value) {}),
                   textField(
-                      "Deal Amount", "enter amount", controller.emailPhoneController),
+                      "Deal Amount", "enter amount", controller.dealAmountController),
                   SizedBox(height: 60,)
 
                 ],

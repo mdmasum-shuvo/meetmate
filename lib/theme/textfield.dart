@@ -13,6 +13,7 @@ Widget textField(String title,String hint,TextEditingController controller){
     SizedBox(height: 4,),
     TextFormField(
       keyboardType: TextInputType.text,
+      controller: controller,
       decoration: InputDecoration(
         hintText: hint,
       ),

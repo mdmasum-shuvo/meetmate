@@ -1,6 +1,7 @@
-import 'package:contactbook/app/modules/create_contact/model/CompanyTypeResponse.dart';
+import 'package:contactbook/app/model/CompanyTypeResponse.dart';
 import 'package:contactbook/app/modules/create_contact/providers/create_contact_provider.dart';
 import 'package:contactbook/app/utils/setting_provider.dart';
+import 'package:contactbook/app/utils/settonController.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
@@ -12,28 +13,46 @@ import '../../../utils/snackbar.dart';
 class CreateContactController extends GetxController {
   //TODO: Implement CreateContactController
 
-  SettingProvider _settingProvider = SettingProvider();
-  CreateContactProvider _provider = CreateContactProvider();
+  final SettingController settingController = SettingController();
+  final CreateContactProvider _provider = CreateContactProvider();
   final count = 0.obs;
-  final emailPhoneController = TextEditingController(text: "");
+  final clientNameController = TextEditingController(text: "");
+  final designationController = TextEditingController(text: "");
+  final phoneNumberController = TextEditingController(text: "");
+  final emailController = TextEditingController(text: "");
+  final websiteController = TextEditingController(text: "");
+  final addressController = TextEditingController(text: "");
+  final cityController = TextEditingController(text: "");
+  final stateController = TextEditingController(text: "");
+  final zipController = TextEditingController(text: "");
+  final dealAmountController = TextEditingController(text: "");
+  final dobController = TextEditingController(text: "");
   RxList<String> genderStr = <String>["Male", "Female"].obs;
   RxList<String> priorityStr = <String>["High", "Medium", "Low"].obs;
   RxList<String> statusStr = <String>["Active", "Inactive"].obs;
   RxList<String> natureStr = <String>["Good", "Bad"].obs;
+  RxList<String> listCompanyTypeName = <String>[].obs;
+  RxList<String> listCompanyTypeId = <String>[].obs;
+
   RxList<String> listCompanyName = <String>[].obs;
-  RxList<String> listCompanyId = <String>[].obs;
-  Rx<CompanyTypeResponse> companyTypeList =
-      CompanyTypeResponse(data: List.empty()).obs;
+  RxList<String> listCountryName = <String>[].obs;
 
   @override
   void onInit() {
     super.onInit();
+    settingController.getCompanyList();
+    settingController.getCountryList();
+    settingController.getCompanyType();
+    listCompanyName = settingController.listCompanyName;
+    listCompanyTypeId = settingController.listCompanyTypeId;
+    listCompanyTypeName = settingController.listCompanyTypeName;
+    listCountryName = settingController.listCountryName;
   }
 
   @override
   void onReady() {
     super.onReady();
-    getCompanyType();
+
   }
 
   @override
@@ -41,45 +60,27 @@ class CreateContactController extends GetxController {
     super.onClose();
   }
 
-  void getCompanyType() async {
-    // EasyLoading.show();
-    _settingProvider.getCompanyType().then((response) async {
-      print(RxStatus.success().toString());
-      if (response.data != null) {
-        companyTypeList.value = response;
-        //department.value = departmentList.value!.data![0].departmentName!;
-        setCompanyTypeData();
-        //getDesignation();
-        EasyLoading.dismiss();
-      } else {
-        //getDesignation();
-
-        EasyLoading.dismiss();
-        getxSnackbar("", "No Data Found!", red);
-      }
-    });
-  }
 
   void createContact() {
     Map<String, String?> qParams = {
-      'client_name': "Masum Talukder",
-      'designation': "Software Engineer",
+      'client_name': clientNameController.text.toString(),
+      'designation':  designationController.text.toString(),
       'company_id': "1",
       'company_type_id': "1",
-      'phone_no': "0163508352",
-      'email': "masumappinion@gmail.com",
-      'website': "www.example.com",
-      'address': "Mirpur-1,Dhaka",
-      'city': "Dhaka",
-      'state': "Dhaka",
-      'post_code': "2331",
+      'phone_no':  phoneNumberController.text.toString(),
+      'email':  emailController.text.toString(),
+      'website': websiteController.text.toString(),
+      'address': addressController.text.toString(),
+      'city': cityController.text.toString(),
+      'state': stateController.text.toString(),
+      'post_code': zipController.text.toString(),
       'country_id': "1",
       'gender': "1",
       'dob': "01/05/1995",
       'piroty': "1",
       'status': "1",
       'nature': "1",
-      'deal_amount': "100000",
+      'deal_amount': dealAmountController.text.toString(),
     };
     EasyLoading.show();
     _provider.createContact(qParams).then((response) async {
@@ -96,18 +97,5 @@ class CreateContactController extends GetxController {
 
   void increment() => count.value++;
 
-  void setCompanyTypeData() async {
-    List<String> listStr = [];
-    List<String> listIds = [];
 
-    //listStr.add("Select Company Type");
-
-    for (int i = 0; i < companyTypeList.value.data!.length; i++) {
-      listStr.add(companyTypeList.value.data![i].companyType!);
-      listIds.add(companyTypeList.value.data![i].id.toString());
-    }
-
-    listCompanyName.value = listStr;
-    listCompanyId.value = listIds;
-  }
 }

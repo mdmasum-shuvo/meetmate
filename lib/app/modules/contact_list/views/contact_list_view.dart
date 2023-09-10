@@ -1,4 +1,5 @@
 import 'package:contactbook/app/modules/contact_list/views/component/contact_item.dart';
+import 'package:contactbook/app/routes/app_pages.dart';
 import 'package:contactbook/theme/app_bar_home.dart';
 import 'package:contactbook/theme/button_theme.dart';
 import 'package:flutter/material.dart';
@@ -21,11 +22,11 @@ class ContactListView extends GetView<ContactListController> {
           Padding(
             padding: const EdgeInsets.all(16.0),
             child: Obx(() => ListView.builder(
-              itemCount: controller.list.value.data?.length!,
-              itemBuilder: (context, index) {
-                return contactItem(controller.list.value.data![index]!);
-              },
-            )),
+                  itemCount: controller.list.value.data?.length!,
+                  itemBuilder: (context, index) {
+                    return contactItem(controller.list.value.data![index]!);
+                  },
+                )),
           ),
           Padding(
             padding: const EdgeInsets.only(right: 22.0, bottom: 30),
@@ -33,8 +34,8 @@ class ContactListView extends GetView<ContactListController> {
               alignment: Alignment.bottomRight,
               child: SizedBox(
                 width: 180,
-                child: primaryButtonWithIcon(
-                    "New Contact", Icons.add, () => null, 24),
+                child: primaryButtonWithIcon("New Contact", Icons.add,
+                    () => Get.toNamed(Routes.CREATE_CONTACT), 24),
               ),
             ),
           )
