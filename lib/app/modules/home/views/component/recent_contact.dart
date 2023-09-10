@@ -1,3 +1,4 @@
+import 'package:contactbook/app/modules/contact_list/model/ContactListResponse.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -11,7 +12,7 @@ import '../../../../../theme/theme.dart';
 import '../../../../routes/app_pages.dart';
 import '../../../../utils/load_network_image.dart';
 
-Widget recentContact(String data) {
+Widget recentContact(Data data) {
   return GestureDetector(
     onTap: () {
       // Get.toNamed(Routes.DETAIL, arguments: [data.employeeId]);
@@ -25,12 +26,12 @@ Widget recentContact(String data) {
           SizedBox(
             height: 72,
             width: 72,
-            child: loadNetworkImage(""),
+            child: loadNetworkImage(data.photo??""),
           ),
           SizedBox(
             height: 8,
           ),
-          SizedBox(width: 72, child: text_12_400("Masum Talukder")),
+          SizedBox(width: 72, child: text_12_400(data.clientName??"")),
 
         ],
       ),

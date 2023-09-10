@@ -35,14 +35,14 @@ class HomeView extends GetView<HomeController> {
               padding: const EdgeInsets.only(left: 16.0),
               child: SizedBox(
                 height: 120,
-                child: ListView.builder(
+                child:Obx(() =>  ListView.builder(
                   shrinkWrap: true,
                   scrollDirection: Axis.horizontal,
-                  itemCount: 10,
+                  itemCount: controller.contactList.value.data?.length!,
                   itemBuilder: (context, index) {
-                    return recentContact("Masum Talukder");
+                    return recentContact(controller.contactList.value.data![index]!);
                   },
-                ),
+                )),
               ),
             ),
             SizedBox(
