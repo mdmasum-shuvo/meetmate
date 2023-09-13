@@ -6,6 +6,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
 
 import '../../../../theme/Colors.dart';
 import '../../../utils/snackbar.dart';
@@ -36,7 +37,8 @@ class CreateContactController extends GetxController {
 
   RxList<String> listCompanyName = <String>[].obs;
   RxList<String> listCountryName = <String>[].obs;
-
+  RxString postDateFormat="".obs;
+  RxString viewDateFormat="".obs;
   @override
   void onInit() {
     super.onInit();
@@ -93,6 +95,15 @@ class CreateContactController extends GetxController {
         getxSnackbar("", "No Data Found!", red);
       }
     });
+  }
+
+  void changeDateformate(DateTime newDateTime) {
+    String viewDate = DateFormat.yMMMd().format(newDateTime);
+    String postDate = DateFormat.yMd().format(newDateTime);
+    viewDateFormat.value=viewDate;
+    postDateFormat.value=postDate;
+
+
   }
 
   void increment() => count.value++;

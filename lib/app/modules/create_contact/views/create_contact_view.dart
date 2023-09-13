@@ -1,6 +1,7 @@
 import 'package:contactbook/theme/text_theme.dart';
 import 'package:contactbook/theme/textfield.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_rounded_date_picker/flutter_rounded_date_picker.dart';
 
 import 'package:get/get.dart';
 
@@ -17,7 +18,7 @@ class CreateContactView extends GetView<CreateContactController> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: customAppbarWidget("Create New Contact"),
-      body:Padding(
+      body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Stack(
           children: [
@@ -29,10 +30,10 @@ class CreateContactView extends GetView<CreateContactController> {
                       controller.clientNameController),
                   textField("Designation", "enter designation",
                       controller.designationController),
-                  dropDown("Company Name","Select Company Name", controller.listCompanyName,
-                          (String value) {}),
-                  dropDown("Company Type","Select Company Type", controller.listCompanyTypeName,
-                          (String value) {}),
+                  dropDown("Company Name", "Select Company Name",
+                      controller.listCompanyName, (String value) {}),
+                  dropDown("Company Type", "Select Company Type",
+                      controller.listCompanyTypeName, (String value) {}),
                   textField("Phone No.", "enter Phone No.",
                       controller.phoneNumberController),
                   textField(
@@ -61,15 +62,15 @@ class CreateContactView extends GetView<CreateContactController> {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Expanded(
-                        child: textField("Zip/Post Code", "enter Zip/postal code",
-                            controller.zipController),
+                        child: textField("Zip/Post Code",
+                            "enter Zip/postal code", controller.zipController),
                       ),
                       SizedBox(
                         width: 8,
                       ),
                       Expanded(
-                        child: dropDown("Country","Select Country", controller.listCountryName,
-                                (String value) {}),
+                        child: dropDown("Country", "Select Country",
+                            controller.listCountryName, (String value) {}),
                       )
                     ],
                   ),
@@ -77,28 +78,44 @@ class CreateContactView extends GetView<CreateContactController> {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Expanded(
-                        child: dropDown(
-                            "Gender", "",controller.genderStr, (String value) {}),
+                        child: dropDown("Gender", "", controller.genderStr,
+                            (String value) {}),
                       ),
                       SizedBox(
                         width: 8,
                       ),
                       Expanded(
-                        child: dateField("Date of Birth", "enter date",
-                            controller.dobController),
+                        child: dateField(
+                            "Date of Birth", "enter date", controller.viewDateFormat,
+                            () async {
+                          print("click date clocik date");
+                          DateTime? newDateTime = await showRoundedDatePicker(
+                            height: 300,
+                            context: context,
+                            locale: Locale('en', 'US'),
+                            initialDate: DateTime(DateTime.now().year - 30),
+                            firstDate: DateTime(DateTime.now().year - 40),
+                            lastDate: DateTime(DateTime.now().year + 40),
+                            borderRadius: 16,
+                          );
+                          if (newDateTime != null) {
+                            controller.changeDateformate(newDateTime);
+                          }
+                        }),
                       )
                     ],
                   ),
-                  dropDown("Priority Level","", controller.priorityStr,
-                          (String value) {}),
+                  dropDown("Priority Level", "", controller.priorityStr,
+                      (String value) {}),
                   dropDown(
-                      "Status","", controller.statusStr, (String value) {}),
+                      "Status", "", controller.statusStr, (String value) {}),
                   dropDown(
-                      "Nature","", controller.natureStr, (String value) {}),
-                  textField(
-                      "Deal Amount", "enter amount", controller.dealAmountController),
-                  SizedBox(height: 60,)
-
+                      "Nature", "", controller.natureStr, (String value) {}),
+                  textField("Deal Amount", "enter amount",
+                      controller.dealAmountController),
+                  SizedBox(
+                    height: 60,
+                  )
                 ],
               ),
             ),

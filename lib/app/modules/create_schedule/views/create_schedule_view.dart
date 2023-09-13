@@ -1,10 +1,13 @@
 import 'dart:ffi';
 
 import 'package:contactbook/app/modules/contact_list/controllers/contact_list_controller.dart';
+import 'package:contactbook/app/routes/app_pages.dart';
 import 'package:contactbook/theme/dropdown.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_rounded_date_picker/flutter_rounded_date_picker.dart';
 
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
 
 import '../../../../theme/button_theme.dart';
 import '../../../../theme/custom_appbar.dart';
@@ -12,9 +15,7 @@ import '../../../../theme/textfield.dart';
 import '../controllers/create_schedule_controller.dart';
 
 class CreateScheduleView extends GetView<CreateScheduleController> {
-
-   const CreateScheduleView({Key? key}) : super(key: key);
-
+  const CreateScheduleView({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -27,19 +28,19 @@ class CreateScheduleView extends GetView<CreateScheduleController> {
             SingleChildScrollView(
               child: Column(
                 children: [
-                  textField("Title", "enter client name",
-                      controller.titleController),
-                  dropDown("Company Name","", controller.companyListStr,
+                  textField(
+                      "Title", "enter client name", controller.titleController),
+                  dropDown("Company Name", "", controller.companyListStr,
                       (String value) {
                     print("company name: $value");
-                      }),
-                  dropDown("Client Name","", controller.contactListStr,
+                  }),
+                  dropDown("Client Name", "", controller.contactListStr,
                       (String value) {}),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      primaryButtonWithIcon(
-                          "New Contact", Icons.add, () => null, 24),
+                      primaryButtonWithIcon("New Contact", Icons.add,
+                          () => Get.toNamed(Routes.CREATE_CONTACT), 24),
                       const SizedBox(
                         width: 8,
                       ),
@@ -50,8 +51,22 @@ class CreateScheduleView extends GetView<CreateScheduleController> {
                   SizedBox(
                     height: 12,
                   ),
-                  dateField("Date", "enter date",
-                      controller.dateController),
+                  dateField("Date", "enter date", controller.viewDateFormat,
+                      () async {
+                    print("click date clocik date");
+                    DateTime? newDateTime = await showRoundedDatePicker(
+                      height: 300,
+                      context: context,
+                      locale: Locale('en', 'US'),
+                      initialDate: DateTime.now(),
+                      firstDate: DateTime(DateTime.now().year - 40),
+                      lastDate: DateTime(DateTime.now().year + 40),
+                      borderRadius: 16,
+                    );
+                    if (newDateTime != null) {
+                      controller.changeDateformate(newDateTime);
+                    }
+                  }),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
@@ -68,15 +83,17 @@ class CreateScheduleView extends GetView<CreateScheduleController> {
                       ),
                     ],
                   ),
-                  dropDown("Location","", controller.locationStr,
+                  dropDown("Location", "", controller.locationStr,
                       (String value) {}),
                   textField("Meeting Link", "enter meeting link",
                       controller.meetingLinkController),
-                  dropDown("Priority Level","", controller.priorityStr,
+                  dropDown("Priority Level", "", controller.priorityStr,
                       (String value) {}),
                   textField("Agenda", "enter meeting agenda",
                       controller.agendaController),
-                  const SizedBox(height: 60,)
+                  const SizedBox(
+                    height: 60,
+                  )
                 ],
               ),
             ),
@@ -89,5 +106,3 @@ class CreateScheduleView extends GetView<CreateScheduleController> {
     );
   }
 }
-
-

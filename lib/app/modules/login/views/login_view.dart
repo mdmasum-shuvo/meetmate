@@ -15,9 +15,10 @@ class LoginView extends GetView<LoginController> {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Scaffold(
-        body: Padding(
+    return Scaffold(
+      backgroundColor: primaryDarkColor,
+      body: SafeArea(
+        child: Container(color: Colors.white,child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 24.0),
           child: Column(
             children: [
@@ -32,60 +33,60 @@ class LoginView extends GetView<LoginController> {
                 ),
               ),
               Obx(() => Flexible(
-                    flex: 5,
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: [
-                        text_14_700("User Id"),
-                        SizedBox(
-                          height: 8.h,
-                        ),
-                        TextFormField(
-                          controller: controller.emailPhoneController,
-                          keyboardType: TextInputType.text,
-                          decoration: InputDecoration(
-                            hintText: "User Id",
-                          ),
-                        ),
-                        SizedBox(
-                          height: 16.h,
-                        ),
-                        text_14_700("Password"),
-                        SizedBox(
-                          height: 8.h,
-                        ),
-                        TextFormField(
-                          controller: controller.passwordController,
-                          obscureText: controller.passwordVisible.value,
-                          decoration: InputDecoration(
-                              hintText: "*********",
-                              suffixIcon: IconButton(
-                                icon: Icon(
-                                  // Based on passwordVisible state choose the icon
-                                  controller.passwordVisible.value
-                                      ? Icons.visibility
-                                      : Icons.visibility_off,
-                                  color: Colors.grey,
-                                ),
-                                onPressed: () {
-                                  // Update the state i.e. toogle the state of passwordVisible variable
-                                  controller.passwordVisible.value =
-                                      !controller.passwordVisible.value;
-                                },
-                              )),
-                        ),
-
-                        SizedBox(
-                          height: 24.h,
-                        ),
-                        primaryButton("Login", () => {controller.login()}),
-                      ],
+                flex: 5,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    text_14_700("User Id"),
+                    SizedBox(
+                      height: 8.h,
                     ),
-                  ))
+                    TextFormField(
+                      controller: controller.emailPhoneController,
+                      keyboardType: TextInputType.text,
+                      decoration: InputDecoration(
+                        hintText: "User Id",
+                      ),
+                    ),
+                    SizedBox(
+                      height: 16.h,
+                    ),
+                    text_14_700("Password"),
+                    SizedBox(
+                      height: 8.h,
+                    ),
+                    TextFormField(
+                      controller: controller.passwordController,
+                      obscureText: controller.passwordVisible.value,
+                      decoration: InputDecoration(
+                          hintText: "*********",
+                          suffixIcon: IconButton(
+                            icon: Icon(
+                              // Based on passwordVisible state choose the icon
+                              controller.passwordVisible.value
+                                  ? Icons.visibility
+                                  : Icons.visibility_off,
+                              color: Colors.grey,
+                            ),
+                            onPressed: () {
+                              // Update the state i.e. toogle the state of passwordVisible variable
+                              controller.passwordVisible.value =
+                              !controller.passwordVisible.value;
+                            },
+                          )),
+                    ),
+
+                    SizedBox(
+                      height: 24.h,
+                    ),
+                    primaryButton("Login", () => {controller.login()}),
+                  ],
+                ),
+              ))
             ],
           ),
-        ),
+        ),),
       ),
     );
   }

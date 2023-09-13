@@ -3,6 +3,7 @@ import 'package:contactbook/app/modules/create_schedule/providers/create_schedul
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
 
 import '../../../../theme/Colors.dart';
 import '../../../utils/settonController.dart';
@@ -34,9 +35,15 @@ class CreateScheduleController extends GetxController {
 
   ContactListController contactListController=ContactListController();
   SettingController settingController=SettingController();
+
+
+   RxString postDateFormat="".obs;
+   RxString viewDateFormat="".obs;
+
   @override
   void onInit() {
     super.onInit();
+
     //getList();
     contactListController.getList();
     settingController.getCompanyList();
@@ -58,7 +65,7 @@ class CreateScheduleController extends GetxController {
   void createSchedule() {
     Map<String, String?> qParams = {
       'title': titleController.text.toString(),
-      'meeting_date': "2023-09-11",
+      'meeting_date':postDateFormat.value,
       'start_time': "12:30",
       'end_time': "14:30",
       'location': "1",
@@ -104,6 +111,16 @@ class CreateScheduleController extends GetxController {
       contactListStr.add(list.value.data![i].clientName??"");
     }
   }
+
+  void changeDateformate(DateTime newDateTime) {
+    String viewDate = DateFormat.yMMMd().format(newDateTime);
+    String postDate = DateFormat.yMd().format(newDateTime);
+    viewDateFormat.value=viewDate;
+    postDateFormat.value=postDate;
+
+
+  }
+
 
 
 
