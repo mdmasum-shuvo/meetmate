@@ -52,7 +52,7 @@ class CreateScheduleView extends GetView<CreateScheduleController> {
                       )
                     ],
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 12,
                   ),
                   dateField("Date", "enter date", controller.viewDateFormat,
