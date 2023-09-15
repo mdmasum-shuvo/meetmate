@@ -13,18 +13,18 @@ class HomeProvider extends GetConnect {
     httpClient.baseUrl = 'YOUR-API-URL';
   }
 
-  Future<ScheduleResponse> getScheduleList() async {
+  Future<ScheduleResponse> getScheduleList(
+      String? date, String? upComingDate) async {
     var url = "${Constants.baseUrl}schedule_list";
-    Map<String, String?> qParams = {
-      'company_id': null,
-    };
+
     print("login url $url");
-    final response = await post(url,{},headers: Constants.headers);
+    final response = await post(url, {'date': date, 'today_date': upComingDate},
+        headers: Constants.headers);
     if (response.status.hasError) {
       String message = "Something went wrong!";
       try {
         message =
-        ErrorResponse.fromJson(jsonDecode(response.bodyString!)).message!;
+            ErrorResponse.fromJson(jsonDecode(response.bodyString!)).message!;
       } catch (e) {
         print(e);
       }
@@ -37,5 +37,4 @@ class HomeProvider extends GetConnect {
       return ScheduleResponse.fromJson(jsonDecode(response.bodyString!));
     }
   }
-
 }

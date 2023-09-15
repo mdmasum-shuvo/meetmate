@@ -19,7 +19,8 @@ class HomeView extends GetView<HomeController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: mainAppBar("Home"),
+      appBar: mainAppBar("MeetMate",false
+      ,true),
       drawer: MainDrawer(),
       body: SingleChildScrollView(
         child: Column(

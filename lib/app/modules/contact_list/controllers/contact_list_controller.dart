@@ -12,6 +12,7 @@ class ContactListController extends GetxController {
   final ContactListProvider _provider = ContactListProvider();
   final count = 0.obs;
   RxList<String> contactListStr = <String>[].obs;
+  RxString selectedContactId = "".obs;
 
   @override
   void onInit() {
@@ -52,6 +53,15 @@ class ContactListController extends GetxController {
     for (int i = 0; i < list.value.data!.length; i++) {
       int number=i+1;
       contactListStr.add( "${number}. ${list.value.data![i].clientName}");
+    }
+  }
+
+  void getSelectedIdFromContactList(String name) {
+    for (int i = 0; i < contactListStr.length; i++) {
+      if (name == contactListStr[i]) {
+        selectedContactId.value = list.value.data![i].id.toString();
+        break;
+      }
     }
   }
 }

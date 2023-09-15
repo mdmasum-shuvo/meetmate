@@ -77,7 +77,7 @@ Widget primaryButtonWhiteWithIcon(
               const SizedBox(
                 width: 4,
               ),
-              text_14_400(text, textColor)
+              Expanded(child: text_14_400(text, textColor))
             ],
           ),
         ),

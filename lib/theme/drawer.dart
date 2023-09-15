@@ -1,4 +1,6 @@
 import 'package:contactbook/app/routes/app_pages.dart';
+import 'package:contactbook/theme/Colors.dart';
+import 'package:contactbook/theme/text_theme.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -23,8 +25,15 @@ class MainDrawer extends StatelessWidget {
             ),
           ),
           ListTile(
-            title: const Text('Home'),
-            tileColor: Get.currentRoute == Routes.HOME ? Colors.grey[300] : null,
+            leading: Icon(Icons.home,
+                color: Get.currentRoute == Routes.HOME
+                    ? primaryDarkColor
+                    : textColor),
+            title: Get.currentRoute == Routes.HOME
+                ? text_14_700("Home", primaryDarkColor)
+                : text_14_400("Home", textColor),
+            tileColor:
+                Get.currentRoute == Routes.HOME ? Colors.grey[300] : null,
             onTap: () {
               print(Get.currentRoute);
               Get.back();
@@ -32,36 +41,57 @@ class MainDrawer extends StatelessWidget {
             },
           ),
           ListTile(
-            title: const Text('Contact List'),
-            tileColor: Get.currentRoute == Routes.CONTACT_LIST  ? Colors.grey[300] : null,
+            leading: Icon(Icons.group,
+                color: Get.currentRoute == Routes.CONTACT_LIST
+                    ? primaryDarkColor
+                    : textColor),
+            title: Get.currentRoute == Routes.CONTACT_LIST
+                ? text_14_700('Contact List', primaryDarkColor)
+                : text_14_400('Contact List', textColor),
+            tileColor: Get.currentRoute == Routes.CONTACT_LIST
+                ? Colors.grey[300]
+                : null,
             onTap: () {
               Get.back();
-              Get.offNamed(Routes.CONTACT_LIST );
-            },
-          ),
-
-          ListTile(
-            title: const Text('My Schedule'),
-            tileColor: Get.currentRoute == Routes.MY_SCHEDULE  ? Colors.grey[300] : null,
-            onTap: () {
-              Get.back();
-              Get.offNamed(Routes.MY_SCHEDULE );
-            },
-          ),
-          ListTile(
-            title: const Text('My Profile'),
-          //  tileColor: Get.currentRoute == Routes.PROFILE ? Colors.grey[300] : null,
-            onTap: () {
-              Get.back();
-              Get.offNamed(Routes.PROFILE );
+              Get.offNamed(Routes.CONTACT_LIST);
             },
           ),
           ListTile(
-            title: const Text('Logout'),
-            tileColor: Get.currentRoute == '/page2' ? Colors.grey[300] : null,
+            leading: Icon(Icons.calendar_month,
+                color: Get.currentRoute == Routes.MY_SCHEDULE
+                    ? primaryDarkColor
+                    : textColor),
+            title: Get.currentRoute == Routes.MY_SCHEDULE
+                ? text_14_700('My Schedule', primaryDarkColor)
+                : text_14_400('My Schedule'),
+            tileColor: Get.currentRoute == Routes.MY_SCHEDULE
+                ? Colors.grey[300]
+                : null,
             onTap: () {
               Get.back();
-             // Get.offNamed('/page2');
+              Get.offNamed(Routes.MY_SCHEDULE);
+            },
+          ),
+          ListTile(
+            leading: Icon(Icons.person_rounded,
+                color: Get.currentRoute == Routes.PROFILE
+                    ? primaryDarkColor
+                    : textColor),
+            title: Get.currentRoute == Routes.PROFILE
+                ? text_14_700('My Profile', primaryDarkColor)
+                : text_14_400('My Profile'),
+            tileColor:
+                Get.currentRoute == Routes.PROFILE ? Colors.grey[300] : null,
+            onTap: () {
+              Get.back();
+              Get.offNamed(Routes.PROFILE);
+            },
+          ),
+          ListTile(
+            leading: Icon(Icons.login, color: textColor),
+            title:text_14_400('Logout'),
+            onTap: () {
+              Get.offAllNamed(Routes.LOGIN);
             },
           ),
         ],

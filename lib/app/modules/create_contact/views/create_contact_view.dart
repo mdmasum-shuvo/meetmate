@@ -31,9 +31,15 @@ class CreateContactView extends GetView<CreateContactController> {
                   textField("Designation", "enter designation",
                       controller.designationController),
                   dropDown("Company Name", "Select Company Name",
-                      controller.listCompanyName, (String value) {}),
+                      controller.listCompanyName, (String value) {
+                    controller.settingController
+                        .getSelectedIdFromCompany(value);
+                  }),
                   dropDown("Company Type", "Select Company Type",
-                      controller.listCompanyTypeName, (String value) {}),
+                      controller.listCompanyTypeName, (String value) {
+                    controller.settingController
+                        .getSelectedIdFromCompanyType(value);
+                  }),
                   textField("Phone No.", "enter Phone No.",
                       controller.phoneNumberController),
                   textField(
@@ -65,12 +71,15 @@ class CreateContactView extends GetView<CreateContactController> {
                         child: textField("Zip/Post Code",
                             "enter Zip/postal code", controller.zipController),
                       ),
-                      SizedBox(
+                      const SizedBox(
                         width: 8,
                       ),
                       Expanded(
                         child: dropDown("Country", "Select Country",
-                            controller.listCountryName, (String value) {}),
+                            controller.listCountryName, (String value) {
+                          controller.settingController
+                              .getSelectedIdFromCountry(value);
+                        }),
                       )
                     ],
                   ),
@@ -79,15 +88,16 @@ class CreateContactView extends GetView<CreateContactController> {
                     children: [
                       Expanded(
                         child: dropDown("Gender", "", controller.genderStr,
-                            (String value) {}),
+                            (String value) {
+                          controller.settingController.getGenderId(value);
+                        }),
                       ),
-                      SizedBox(
+                      const SizedBox(
                         width: 8,
                       ),
                       Expanded(
-                        child: dateField(
-                            "Date of Birth", "enter date", controller.viewDateFormat,
-                            () async {
+                        child: dateField("Date of Birth", "enter date",
+                            controller.viewDateFormat, () async {
                           print("click date clocik date");
                           DateTime? newDateTime = await showRoundedDatePicker(
                             height: 300,
@@ -99,21 +109,26 @@ class CreateContactView extends GetView<CreateContactController> {
                             borderRadius: 16,
                           );
                           if (newDateTime != null) {
-                            controller.changeDateformate(newDateTime);
+                            controller.changeDateFormat(newDateTime);
                           }
                         }),
                       )
                     ],
                   ),
                   dropDown("Priority Level", "", controller.priorityStr,
-                      (String value) {}),
+                      (String value) {
+                    controller.settingController.getPriorityId(value);
+                  }),
+                  dropDown("Status", "", controller.statusStr, (String value) {
+                    controller.settingController.getStatusId(value);
+                  }),
                   dropDown(
-                      "Status", "", controller.statusStr, (String value) {}),
-                  dropDown(
-                      "Nature", "", controller.natureStr, (String value) {}),
+                      "Nature", "", controller.natureStr, (String value) {
+                    controller.settingController.getNatureId(value);
+                  }),
                   textField("Deal Amount", "enter amount",
                       controller.dealAmountController),
-                  SizedBox(
+                  const SizedBox(
                     height: 60,
                   )
                 ],

@@ -3,6 +3,7 @@ import 'package:contactbook/app/modules/home/model/ScheduleResponse.dart';
 import 'package:contactbook/app/modules/home/providers/home_provider.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
 
 import '../../../../theme/Colors.dart';
 import '../../../utils/snackbar.dart';
@@ -12,15 +13,17 @@ class HomeController extends GetxController {
   //TODO: Implement HomeController
   Rx<ScheduleResponse> scheduleList = ScheduleResponse(data: List.empty()).obs;
   final HomeProvider _provider = HomeProvider();
-  Rx<ContactListResponse> contactList = ContactListResponse(data: List.empty()).obs;
+  Rx<ContactListResponse> contactList =
+      ContactListResponse(data: List.empty()).obs;
 
-  final ContactListController contactListController=ContactListController();
+  final ContactListController contactListController = ContactListController();
   final count = 0.obs;
+
   @override
   void onInit() {
     super.onInit();
     contactListController.getList();
-    contactList=contactListController.list;
+    contactList = contactListController.list;
   }
 
   @override
@@ -36,10 +39,8 @@ class HomeController extends GetxController {
 
   void getScheduleList() async {
     EasyLoading.show();
-
-    _provider
-        .getScheduleList()
-        .then((response) async {
+    String postDate = DateFormat.yMd().format(DateTime.now());
+    _provider.getScheduleList(null,postDate).then((response) async {
       print(RxStatus.success().toString());
       if (response.data != null) {
         EasyLoading.dismiss();
@@ -47,11 +48,14 @@ class HomeController extends GetxController {
       } else {
         EasyLoading.dismiss();
         getxSnackbar("", "No Data Found!", red);
-
       }
     });
   }
 
+  void changeDateformate(DateTime newDateTime) {
+    String viewDate = DateFormat.yMMMd().format(newDateTime);
+    String postDate = DateFormat.yMd().format(newDateTime);
+  }
 
   void increment() => count.value++;
 }

@@ -27,7 +27,6 @@ class CreateContactController extends GetxController {
   final stateController = TextEditingController(text: "");
   final zipController = TextEditingController(text: "");
   final dealAmountController = TextEditingController(text: "");
-  final dobController = TextEditingController(text: "");
   RxList<String> genderStr = <String>["Male", "Female"].obs;
   RxList<String> priorityStr = <String>["High", "Medium", "Low"].obs;
   RxList<String> statusStr = <String>["Active", "Inactive"].obs;
@@ -51,24 +50,13 @@ class CreateContactController extends GetxController {
     listCountryName = settingController.listCountryName;
   }
 
-  @override
-  void onReady() {
-    super.onReady();
-
-  }
-
-  @override
-  void onClose() {
-    super.onClose();
-  }
-
 
   void createContact() {
     Map<String, String?> qParams = {
       'client_name': clientNameController.text.toString(),
       'designation':  designationController.text.toString(),
-      'company_id': "1",
-      'company_type_id': "1",
+      'company_id': settingController.selectedCompanyId.value,
+      'company_type_id': settingController.selectedCompanyTypeId.value,
       'phone_no':  phoneNumberController.text.toString(),
       'email':  emailController.text.toString(),
       'website': websiteController.text.toString(),
@@ -76,12 +64,12 @@ class CreateContactController extends GetxController {
       'city': cityController.text.toString(),
       'state': stateController.text.toString(),
       'post_code': zipController.text.toString(),
-      'country_id': "1",
-      'gender': "1",
-      'dob': "01/05/1995",
-      'piroty': "1",
-      'status': "1",
-      'nature': "1",
+      'country_id': settingController.selectedCountryId.value,
+      'gender': settingController.selectedGenderId.value,
+      'dob': postDateFormat.value,
+      'piroty': settingController.selectedPriorityId.value,
+      'status': settingController.selectedStatusId.value,
+      'nature': settingController.selectedNatureId.value,
       'deal_amount': dealAmountController.text.toString(),
     };
     EasyLoading.show();
@@ -97,13 +85,11 @@ class CreateContactController extends GetxController {
     });
   }
 
-  void changeDateformate(DateTime newDateTime) {
+  void changeDateFormat(DateTime newDateTime) {
     String viewDate = DateFormat.yMMMd().format(newDateTime);
     String postDate = DateFormat.yMd().format(newDateTime);
     viewDateFormat.value=viewDate;
     postDateFormat.value=postDate;
-
-
   }
 
   void increment() => count.value++;

@@ -117,8 +117,6 @@ class CreateScheduleController extends GetxController {
     String postDate = DateFormat.yMd().format(newDateTime);
     viewDateFormat.value=viewDate;
     postDateFormat.value=postDate;
-
-
   }
 
 

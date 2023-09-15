@@ -31,42 +31,53 @@ class CreateScheduleView extends GetView<CreateScheduleController> {
                   textField(
                       "Title", "enter client name", controller.titleController),
                   dropDown("Company Name", "", controller.companyListStr,
-                      (String value) {
-                    print("company name: $value");
-                  }),
+                          (String value) {
+                        controller.settingController
+                            .getSelectedIdFromCompany(value);
+                        print("company name: $value");
+                      }),
                   dropDown("Client Name", "", controller.contactListStr,
-                      (String value) {}),
+                          (String value) {
+                        controller.contactListController
+                            .getSelectedIdFromContactList(value);
+                      }),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       primaryButtonWithIcon("New Contact", Icons.add,
-                          () => Get.toNamed(Routes.CREATE_CONTACT), 24),
+                              () => Get.toNamed(Routes.CREATE_CONTACT), 24),
                       const SizedBox(
-                        width: 8,
+                        width: 4,
                       ),
-                      primaryButtonWhiteWithIcon("Add Participant",
-                          Icons.person_add_outlined, () => null, 24)
+                      Expanded(
+                        child: primaryButtonWhiteWithIcon("Add Participant",
+                            Icons.person_add_outlined, () => null, 24),
+                      )
                     ],
                   ),
                   SizedBox(
                     height: 12,
                   ),
                   dateField("Date", "enter date", controller.viewDateFormat,
-                      () async {
-                    print("click date clocik date");
-                    DateTime? newDateTime = await showRoundedDatePicker(
-                      height: 300,
-                      context: context,
-                      locale: Locale('en', 'US'),
-                      initialDate: DateTime.now(),
-                      firstDate: DateTime(DateTime.now().year - 40),
-                      lastDate: DateTime(DateTime.now().year + 40),
-                      borderRadius: 16,
-                    );
-                    if (newDateTime != null) {
-                      controller.changeDateformate(newDateTime);
-                    }
-                  }),
+                          () async {
+                        print("click date clocik date");
+                        DateTime? newDateTime = await showRoundedDatePicker(
+                          height: 300,
+                          context: context,
+                          locale: Locale('en', 'US'),
+                          initialDate: DateTime.now(),
+                          firstDate: DateTime(DateTime
+                              .now()
+                              .year - 40),
+                          lastDate: DateTime(DateTime
+                              .now()
+                              .year + 40),
+                          borderRadius: 16,
+                        );
+                        if (newDateTime != null) {
+                          controller.changeDateformate(newDateTime);
+                        }
+                      }),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
@@ -84,11 +95,11 @@ class CreateScheduleView extends GetView<CreateScheduleController> {
                     ],
                   ),
                   dropDown("Location", "", controller.locationStr,
-                      (String value) {}),
+                          (String value) {}),
                   textField("Meeting Link", "enter meeting link",
                       controller.meetingLinkController),
                   dropDown("Priority Level", "", controller.priorityStr,
-                      (String value) {}),
+                          (String value) {}),
                   textField("Agenda", "enter meeting agenda",
                       controller.agendaController),
                   const SizedBox(

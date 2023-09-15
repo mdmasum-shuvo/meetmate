@@ -1,4 +1,3 @@
-
 import 'package:contactbook/app/model/CompanyResponse.dart';
 import 'package:contactbook/app/model/CountryResponse.dart';
 import 'package:contactbook/app/utils/setting_provider.dart';
@@ -9,12 +8,11 @@ import 'package:get/get.dart';
 import '../../theme/Colors.dart';
 import '../model/CompanyTypeResponse.dart';
 
-class SettingController extends GetxController{
+class SettingController extends GetxController {
   final SettingProvider _settingProvider = SettingProvider();
   RxList<String> listCompanyName = <String>[].obs;
   RxList<String> listCompanyId = <String>[].obs;
-  Rx<CompanyResponse> companyList =
-      CompanyResponse(data: List.empty()).obs;
+  Rx<CompanyResponse> companyList = CompanyResponse(data: List.empty()).obs;
   RxList<String> listCompanyTypeName = <String>[].obs;
   RxList<String> listCompanyTypeId = <String>[].obs;
   Rx<CompanyTypeResponse> companyTypeList =
@@ -22,8 +20,14 @@ class SettingController extends GetxController{
 
   RxList<String> listCountryName = <String>[].obs;
   RxList<String> listCountryId = <String>[].obs;
-  Rx<CountryResponse> countryList =
-      CountryResponse(data: List.empty()).obs;
+  Rx<CountryResponse> countryList = CountryResponse(data: List.empty()).obs;
+  RxString selectedCompanyId = "".obs;
+  RxString selectedCompanyTypeId = "".obs;
+  RxString selectedCountryId = "".obs;
+  RxString selectedPriorityId = "".obs;
+  RxString selectedStatusId = "".obs;
+  RxString selectedGenderId = "".obs;
+  RxString selectedNatureId = "".obs;
 
   void getCompanyList() async {
     // EasyLoading.show();
@@ -43,6 +47,7 @@ class SettingController extends GetxController{
       }
     });
   }
+
   void getCountryList() async {
     // EasyLoading.show();
     _settingProvider.getCountry().then((response) async {
@@ -82,7 +87,7 @@ class SettingController extends GetxController{
     List<String> listIds = [];
 
     for (int i = 0; i < countryList.value.data!.length; i++) {
-      listStr.add(countryList.value.data![i].name??"");
+      listStr.add(countryList.value.data![i].name ?? "");
       listIds.add(countryList.value.data![i].id.toString());
     }
 
@@ -108,6 +113,7 @@ class SettingController extends GetxController{
       }
     });
   }
+
   void setCompanyTypeData() async {
     List<String> listStr = [];
     List<String> listIds = [];
@@ -123,4 +129,65 @@ class SettingController extends GetxController{
     listCompanyTypeId.value = listIds;
   }
 
+  void getSelectedIdFromCompany(String companyName) {
+    for (int i = 0; i < listCompanyName.length; i++) {
+      if (companyName == listCompanyName[i]) {
+        selectedCompanyId.value = listCompanyId[i];
+        print(selectedCompanyId.value);
+        break;
+      }
+    }
+  }
+
+  void getSelectedIdFromCompanyType(String companyType) {
+    for (int i = 0; i < listCompanyTypeName.length; i++) {
+      if (companyType == listCompanyTypeName[i]) {
+        selectedCompanyTypeId.value = listCompanyTypeId[i];
+        break;
+      }
+    }
+  }
+
+  void getSelectedIdFromCountry(String countryName) {
+    for (int i = 0; i < listCountryName.length; i++) {
+      if (countryName == listCountryName[i]) {
+        selectedCountryId.value = listCountryId[i];
+        break;
+      }
+    }
+  }
+
+  void getPriorityId(String name) {
+    if (name == "High") {
+      selectedPriorityId.value = "3";
+    } else if (name == "Medium") {
+      selectedPriorityId.value = "2";
+    } else if (name == "Low") {
+      selectedPriorityId.value = "1";
+    }
+  }
+
+  void getStatusId(String name) {
+    if (name == "Active") {
+      selectedStatusId.value = "1";
+    } else if (name == "Inactive") {
+      selectedStatusId.value = "2";
+    }
+  }
+
+  void getGenderId(String name) {
+    if (name == "Male") {
+      selectedGenderId.value = "1";
+    } else if (name == "Female") {
+      selectedGenderId.value = "2";
+    }
+  }
+
+  void getNatureId(String name) {
+    if (name == "Good") {
+      selectedNatureId.value = "1";
+    } else if (name == "Bad") {
+      selectedNatureId.value = "2";
+    }
+  }
 }
