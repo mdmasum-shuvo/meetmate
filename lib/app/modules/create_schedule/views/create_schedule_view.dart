@@ -1,13 +1,10 @@
-import 'dart:ffi';
 
-import 'package:contactbook/app/modules/contact_list/controllers/contact_list_controller.dart';
 import 'package:contactbook/app/routes/app_pages.dart';
 import 'package:contactbook/theme/dropdown.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rounded_date_picker/flutter_rounded_date_picker.dart';
 
 import 'package:get/get.dart';
-import 'package:intl/intl.dart';
 
 import '../../../../theme/button_theme.dart';
 import '../../../../theme/custom_appbar.dart';
