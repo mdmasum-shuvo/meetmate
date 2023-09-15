@@ -61,7 +61,7 @@ class CreateScheduleView extends GetView<CreateScheduleController> {
                         DateTime? newDateTime = await showRoundedDatePicker(
                           height: 300,
                           context: context,
-                          locale: Locale('en', 'US'),
+                          locale: const Locale('en', 'US'),
                           initialDate: DateTime.now(),
                           firstDate: DateTime(DateTime
                               .now()
