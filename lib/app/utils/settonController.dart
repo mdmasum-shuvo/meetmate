@@ -25,6 +25,7 @@ class SettingController extends GetxController {
   RxString selectedCompanyTypeId = "".obs;
   RxString selectedCountryId = "".obs;
   RxString selectedPriorityId = "".obs;
+  RxString selectedLocationId = "".obs;
   RxString selectedStatusId = "".obs;
   RxString selectedGenderId = "".obs;
   RxString selectedNatureId = "".obs;
@@ -164,6 +165,16 @@ class SettingController extends GetxController {
       selectedPriorityId.value = "2";
     } else if (name == "Low") {
       selectedPriorityId.value = "1";
+    }
+  }
+
+  void getLocationId(String name) {
+    if (name == "online") {
+      selectedLocationId.value = "1";
+    } else if (name == "offLine") {
+      selectedLocationId.value = "2";
+    } else if (name == "others") {
+      selectedLocationId.value = "3";
     }
   }
 

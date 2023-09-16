@@ -13,7 +13,7 @@ import '../../contact_list/providers/contact_list_provider.dart';
 
 class CreateScheduleController extends GetxController {
   //TODO: Implement CreateScheduleController
-  RxList<String> locationStr = <String>["Online","Offline","Others"].obs;
+  RxList<String> locationStr = <String>["online", "offLine", "others"].obs;
   final clientNameController = TextEditingController(text: "");
   final titleController = TextEditingController(text: "");
   final dateController = TextEditingController(text: "");
@@ -21,11 +21,16 @@ class CreateScheduleController extends GetxController {
   final endTimeController = TextEditingController(text: "");
   final agendaController = TextEditingController(text: "");
   final meetingLinkController = TextEditingController(text: "");
-  RxList<String> priorityStr = <String>["High","Medium","Low"].obs;
+  RxList<String> priorityStr = <String>["High", "Medium", "Low"].obs;
   var selectedDate = DateTime.now().obs;
-  var selectedTime = TimeOfDay.now().obs;
-  TextEditingController textEditingController=TextEditingController();
+  Rx<TimeOfDay> selectedStartTime = TimeOfDay.now().obs;
+  Rx<TimeOfDay> selectedEndTime = TimeOfDay.now().obs;
+  Rx<TimeOfDay> timeOfDay = TimeOfDay.now().obs;
+  RxString selectedStartTimeStr = "".obs;
+  RxString selectedEndTimeStr = "".obs;
+  TextEditingController textEditingController = TextEditingController();
   final CreateScheduleProvider _provider = CreateScheduleProvider();
+
   //Rx<ContactListResponse> contactList = ContactListResponse(data: List.empty()).obs;
   Rx<ContactListResponse> list = ContactListResponse(data: List.empty()).obs;
   final ContactListProvider _contactProvider = ContactListProvider();
@@ -33,22 +38,19 @@ class CreateScheduleController extends GetxController {
   RxList<String> contactListStr = <String>[].obs;
   RxList<String> companyListStr = <String>[].obs;
 
-  ContactListController contactListController=ContactListController();
-  SettingController settingController=SettingController();
+  ContactListController contactListController = ContactListController();
+  SettingController settingController = SettingController();
 
-
-   RxString postDateFormat="".obs;
-   RxString viewDateFormat="".obs;
+  RxString postDateFormat = "".obs;
+  RxString viewDateFormat = "".obs;
 
   @override
   void onInit() {
     super.onInit();
-
-    //getList();
     contactListController.getList();
     settingController.getCompanyList();
-    contactListStr=contactListController.contactListStr;
-    companyListStr=settingController.listCompanyName;
+    contactListStr = contactListController.contactListStr;
+    companyListStr = settingController.listCompanyName;
   }
 
   @override
@@ -62,18 +64,29 @@ class CreateScheduleController extends GetxController {
   }
 
   void increment() => count.value++;
+
   void createSchedule() {
+    if (titleController.text.toString() == "" ||
+        postDateFormat.value == "" ||
+        selectedStartTimeStr.value == "" ||
+        selectedEndTimeStr.value == "" ||
+        settingController.selectedLocationId.value == "" ||
+        meetingLinkController.text.toString() == "" ||
+        settingController.selectedPriorityId.value == "" ||
+        agendaController.text.toString() == "") {
+      getxSnackbar("", "Please fill up all mandatory field", red);
+      return;
+    }
     Map<String, String?> qParams = {
       'title': titleController.text.toString(),
-      'meeting_date':postDateFormat.value,
-      'start_time': "12:30",
-      'end_time': "14:30",
-      'location': "1",
+      'meeting_date': postDateFormat.value,
+      'start_time': format24(selectedStartTimeStr.value),
+      'end_time': format24(selectedEndTimeStr.value),
+      'location': settingController.selectedLocationId.value,
       'meeting_link': meetingLinkController.text.toString(),
-      'piroty': "1",
-      'agenda':agendaController.text.toString(),
+      'piroty': settingController.selectedPriorityId.value,
+      'agenda': agendaController.text.toString(),
       'particepents': "1,2"
-
     };
     EasyLoading.show();
     _provider.createSchedule(qParams).then((response) async {
@@ -81,6 +94,7 @@ class CreateScheduleController extends GetxController {
       if (response.status == 200) {
         getxSnackbar("", response.message ?? "", Colors.green);
         EasyLoading.dismiss();
+        //Get.back();
       } else {
         EasyLoading.dismiss();
         getxSnackbar("", "No Data Found!", red);
@@ -91,9 +105,7 @@ class CreateScheduleController extends GetxController {
   void getList() async {
     EasyLoading.show();
 
-    _contactProvider
-        .getContactList()
-        .then((response) async {
+    _contactProvider.getContactList().then((response) async {
       print(RxStatus.success().toString());
       if (response.data != null) {
         EasyLoading.dismiss();
@@ -102,24 +114,33 @@ class CreateScheduleController extends GetxController {
       } else {
         EasyLoading.dismiss();
         getxSnackbar("", "No Data Found!", red);
-
       }
     });
   }
+
   void convertContactList() {
     for (int i = 0; i < list.value.data!.length; i++) {
-      contactListStr.add(list.value.data![i].clientName??"");
+      contactListStr.add(list.value.data![i].clientName ?? "");
     }
   }
 
   void changeDateformate(DateTime newDateTime) {
     String viewDate = DateFormat.yMMMd().format(newDateTime);
     String postDate = DateFormat.yMd().format(newDateTime);
-    viewDateFormat.value=viewDate;
-    postDateFormat.value=postDate;
+    viewDateFormat.value = viewDate;
+    postDateFormat.value = postDate;
   }
 
+  void formatStartTime(BuildContext context) {
+    selectedStartTimeStr.value = selectedStartTime.value.format(context);
+  }
 
+  void formatEndTime(BuildContext context) {
+    selectedEndTimeStr.value = selectedEndTime.value.format(context);
+  }
 
-
+  String format24(String time) {
+    DateTime date = DateFormat("hh:mm a").parse("6:45 PM");
+    return DateFormat("HH:mm").format(date);
+  }
 }

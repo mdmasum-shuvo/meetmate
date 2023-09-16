@@ -36,8 +36,9 @@ class CreateContactController extends GetxController {
 
   RxList<String> listCompanyName = <String>[].obs;
   RxList<String> listCountryName = <String>[].obs;
-  RxString postDateFormat="".obs;
-  RxString viewDateFormat="".obs;
+  RxString postDateFormat = "".obs;
+  RxString viewDateFormat = "".obs;
+
   @override
   void onInit() {
     super.onInit();
@@ -50,15 +51,35 @@ class CreateContactController extends GetxController {
     listCountryName = settingController.listCountryName;
   }
 
-
   void createContact() {
+    if (clientNameController.text.toString() == "" ||
+        designationController.text.toString() == "" ||
+        settingController.selectedCompanyId.value== "" ||
+        settingController.selectedCompanyTypeId.value == "" ||
+        phoneNumberController.text.toString() == "" ||
+        emailController.text.toString() == "" ||
+        websiteController.text.toString() == "" ||
+        addressController.text.toString() == "" ||
+        cityController.text.toString() == "" ||
+        stateController.text.toString() == "" ||
+        zipController.text.toString() == "" ||
+        settingController.selectedCountryId.value== "" ||
+        settingController.selectedPriorityId.value == "" ||
+        settingController.selectedStatusId.value == "" ||
+        postDateFormat.value == "" ||
+        settingController.selectedNatureId.value == "" ||
+        dealAmountController.text.toString() == "") {
+      getxSnackbar("", "Please fill up all mandatory field", red);
+      return;
+    }
+
     Map<String, String?> qParams = {
       'client_name': clientNameController.text.toString(),
-      'designation':  designationController.text.toString(),
+      'designation': designationController.text.toString(),
       'company_id': settingController.selectedCompanyId.value,
       'company_type_id': settingController.selectedCompanyTypeId.value,
-      'phone_no':  phoneNumberController.text.toString(),
-      'email':  emailController.text.toString(),
+      'phone_no': phoneNumberController.text.toString(),
+      'email': emailController.text.toString(),
       'website': websiteController.text.toString(),
       'address': addressController.text.toString(),
       'city': cityController.text.toString(),
@@ -78,6 +99,7 @@ class CreateContactController extends GetxController {
       if (response.status == 200) {
         getxSnackbar("", response.message ?? "", Colors.green);
         EasyLoading.dismiss();
+        //Get.back();
       } else {
         EasyLoading.dismiss();
         getxSnackbar("", "No Data Found!", red);
@@ -88,11 +110,9 @@ class CreateContactController extends GetxController {
   void changeDateFormat(DateTime newDateTime) {
     String viewDate = DateFormat.yMMMd().format(newDateTime);
     String postDate = DateFormat.yMd().format(newDateTime);
-    viewDateFormat.value=viewDate;
-    postDateFormat.value=postDate;
+    viewDateFormat.value = viewDate;
+    postDateFormat.value = postDate;
   }
 
   void increment() => count.value++;
-
-
 }

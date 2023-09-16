@@ -1,3 +1,4 @@
+import 'dart:ffi';
 
 import 'package:contactbook/app/routes/app_pages.dart';
 import 'package:contactbook/theme/dropdown.dart';
@@ -28,21 +29,21 @@ class CreateScheduleView extends GetView<CreateScheduleController> {
                   textField(
                       "Title", "enter client name", controller.titleController),
                   dropDown("Company Name", "", controller.companyListStr,
-                          (String value) {
-                        controller.settingController
-                            .getSelectedIdFromCompany(value);
-                        print("company name: $value");
-                      }),
+                      (String value) {
+                    controller.settingController
+                        .getSelectedIdFromCompany(value);
+                    print("company name: $value");
+                  }),
                   dropDown("Client Name", "", controller.contactListStr,
-                          (String value) {
-                        controller.contactListController
-                            .getSelectedIdFromContactList(value);
-                      }),
+                      (String value) {
+                    controller.contactListController
+                        .getSelectedIdFromContactList(value);
+                  }),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       primaryButtonWithIcon("New Contact", Icons.add,
-                              () => Get.toNamed(Routes.CREATE_CONTACT), 24),
+                          () => Get.toNamed(Routes.CREATE_CONTACT), 24),
                       const SizedBox(
                         width: 4,
                       ),
@@ -56,47 +57,66 @@ class CreateScheduleView extends GetView<CreateScheduleController> {
                     height: 12,
                   ),
                   dateField("Date", "enter date", controller.viewDateFormat,
-                          () async {
-                        print("click date clocik date");
-                        DateTime? newDateTime = await showRoundedDatePicker(
-                          height: 300,
-                          context: context,
-                          locale: const Locale('en', 'US'),
-                          initialDate: DateTime.now(),
-                          firstDate: DateTime(DateTime
-                              .now()
-                              .year - 40),
-                          lastDate: DateTime(DateTime
-                              .now()
-                              .year + 40),
-                          borderRadius: 16,
-                        );
-                        if (newDateTime != null) {
-                          controller.changeDateformate(newDateTime);
-                        }
-                      }),
+                      () async {
+                    print("click date clocik date");
+                    DateTime? newDateTime = await showRoundedDatePicker(
+                      height: 300,
+                      context: context,
+                      locale: const Locale('en', 'US'),
+                      initialDate: DateTime.now(),
+                      firstDate: DateTime(DateTime.now().year - 40),
+                      lastDate: DateTime(DateTime.now().year + 40),
+                      borderRadius: 16,
+                    );
+                    if (newDateTime != null) {
+                      controller.changeDateformate(newDateTime);
+                    }
+                  }),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Expanded(
-                        child: timeField("Start time", "enter time",
-                            controller.startTimeController),
+                        child: timeField(
+                            "Start time",
+                            controller.selectedStartTimeStr,
+                            "enter time", () async {
+                          TimeOfDay time = (await showTimePicker(
+                            initialTime: controller.selectedStartTime.value,
+                            context: context,
+                          ))!;
+                          controller.selectedStartTime.value = time;
+                          controller.formatStartTime(context);
+                        }),
                       ),
                       const SizedBox(
                         width: 8,
                       ),
                       Expanded(
-                        child: timeField("End time", "enter time",
-                            controller.endTimeController),
+                        child: timeField(
+                            "End time",
+                            controller.selectedEndTimeStr,
+                            "enter time", () async {
+                          TimeOfDay time = (await showTimePicker(
+                            initialTime: controller.selectedEndTime.value,
+                            context: context,
+                          ))!;
+                          controller.selectedEndTime.value = time;
+                          controller.formatEndTime(context);
+                        }),
                       ),
                     ],
                   ),
-                  dropDown("Location", "", controller.locationStr,
-                          (String value) {}),
+                  dropDown(
+                      "Location", "Select location", controller.locationStr,
+                      (String value) {
+                    controller.settingController.getLocationId(value);
+                  }),
                   textField("Meeting Link", "enter meeting link",
                       controller.meetingLinkController),
-                  dropDown("Priority Level", "", controller.priorityStr,
-                          (String value) {}),
+                  dropDown("Priority Level", "Select priority",
+                      controller.priorityStr, (String value) {
+                    controller.settingController.getPriorityId(value);
+                  }),
                   textField("Agenda", "enter meeting agenda",
                       controller.agendaController),
                   const SizedBox(
