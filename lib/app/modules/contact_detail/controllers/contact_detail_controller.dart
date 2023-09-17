@@ -7,7 +7,6 @@ import '../../../../theme/Colors.dart';
 import '../../../utils/snackbar.dart';
 
 class ContactDetailController extends GetxController {
-  //TODO: Implement ContactDetailController
 
   Rx<ContactDetailResponse> data = ContactDetailResponse().obs;
   final ContactDetailProvider _provider = ContactDetailProvider();
@@ -16,12 +15,12 @@ class ContactDetailController extends GetxController {
   @override
   void onReady() {
     super.onReady();
-    id=Get.arguments[0];
-    getDetail();
+
   }
   @override
   void onInit() {
-    // TODO: implement onInit
+    id=Get.arguments[0];
+    getDetail();
     super.onInit();
   }
 

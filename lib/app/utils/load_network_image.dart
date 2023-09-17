@@ -9,12 +9,21 @@ import '../../theme/image_assets.dart';
 Widget loadNetworkImage(String img) {
   return CachedNetworkImage(
     fit: BoxFit.cover,
-    imageUrl: img,
+    imageUrl: "https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
     placeholder: (context, url) => const Padding(
       padding: EdgeInsets.all(5),
       child: SpinKitCircle(
         color: Colors.black,
         size: 30.0,
+      ),
+    ),
+    imageBuilder: (context, imageProvider) => Container(
+      decoration: BoxDecoration(
+        shape: BoxShape.circle,
+        image: DecorationImage(
+          image: imageProvider,
+          fit: BoxFit.cover,
+        ),
       ),
     ),
     errorWidget: (context, url, error) => Padding(
