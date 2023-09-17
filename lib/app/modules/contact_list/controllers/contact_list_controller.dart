@@ -10,7 +10,6 @@ class ContactListController extends GetxController {
   //TODO: Implement ContactListController
   Rx<ContactListResponse> list = ContactListResponse(data: List.empty()).obs;
   final ContactListProvider _provider = ContactListProvider();
-  final count = 0.obs;
   RxList<String> contactListStr = <String>[].obs;
   RxString selectedContactId = "".obs;
 
@@ -30,7 +29,6 @@ class ContactListController extends GetxController {
     super.onClose();
   }
 
-  void increment() => count.value++;
   void getList() async {
     EasyLoading.show();
 
