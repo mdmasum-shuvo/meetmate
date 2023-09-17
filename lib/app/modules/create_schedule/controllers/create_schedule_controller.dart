@@ -39,6 +39,7 @@ class CreateScheduleController extends GetxController {
   RxList<String> participantStr = <String>[].obs;
   RxList<String> companyListStr = <String>[].obs;
 
+  RxList<String> participantId = <String>[].obs;
   ContactListController contactListController = ContactListController();
   SettingController settingController = SettingController();
 
@@ -74,10 +75,14 @@ class CreateScheduleController extends GetxController {
         settingController.selectedLocationId.value == "" ||
         meetingLinkController.text.toString() == "" ||
         settingController.selectedPriorityId.value == "" ||
+        participantStr.isEmpty ||
         agendaController.text.toString() == "") {
       getxSnackbar("", "Please fill up all mandatory field", red);
       return;
     }
+
+    setParticipantId();
+
     Map<String, String?> qParams = {
       'title': titleController.text.toString(),
       'meeting_date': postDateFormat.value,
@@ -143,5 +148,20 @@ class CreateScheduleController extends GetxController {
   String format24(String time) {
     DateTime date = DateFormat("hh:mm a").parse("6:45 PM");
     return DateFormat("HH:mm").format(date);
+  }
+
+  void setParticipantId() {
+    print("participants${participantId.toString()}");
+
+    for (int i = 0; i < contactListController.list.value.data!.length; i++) {
+      for (int j = 0; j < participantStr.length; j++) {
+        if (contactListController.list.value.data![i].clientName! ==
+            participantStr[j]) {
+          participantId
+              .add(contactListController.list.value.data![i].id.toString());
+          print("participants${participantId.toString()}");
+        }
+      }
+    }
   }
 }

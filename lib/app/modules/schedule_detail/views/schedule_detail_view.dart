@@ -24,7 +24,7 @@ class ScheduleDetailView extends GetView<ScheduleDetailController> {
                       viewData("Title", controller.data?.value?.title ?? ""),
                       viewData(
                           "Date", controller.data?.value?.meetingDate ?? ""),
-                      viewData("Date",
+                      viewData("Time",
                           "${controller.data?.value?.startTime}-${controller.data?.value?.endTime!}"),
                       viewData("Location",
                           controller.data?.value?.meetingLocation ?? ""),
@@ -33,7 +33,7 @@ class ScheduleDetailView extends GetView<ScheduleDetailController> {
                               ? "Meeting Link"
                               : "Address",
                           controller.data?.value?.meetingLink ?? ""),
-                      participants(controller.data!.value!.participent!),
+                      participants(controller.data!.value!.participentList!),
                       viewData("Agenda", controller.data?.value?.agenda ?? ""),
                     ],
                   )

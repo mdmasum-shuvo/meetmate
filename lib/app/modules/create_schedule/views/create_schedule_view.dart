@@ -135,7 +135,7 @@ class CreateScheduleView extends GetView<CreateScheduleController> {
             ),
             Align(
                 alignment: Alignment.bottomRight,
-                child: primaryButton("Save", () => controller.createSchedule()))
+                child: primaryButton("Save", () => controller.setParticipantId()))
           ],
         ),
       ),

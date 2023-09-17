@@ -1,10 +1,10 @@
-import 'package:contactbook/app/modules/schedule_detail/model/Data.dart';
 import 'package:contactbook/app/modules/schedule_detail/providers/schedule_detail_provider.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:get/get.dart';
 
 import '../../../../theme/Colors.dart';
 import '../../../utils/snackbar.dart';
+import '../../schedule_detail/model/ScheduleDetailResponse.dart';
 
 class ScheduleDetailController extends GetxController {
   //TODO: Implement ScheduleDetailController

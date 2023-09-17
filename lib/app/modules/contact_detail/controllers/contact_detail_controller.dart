@@ -12,11 +12,23 @@ class ContactDetailController extends GetxController {
   Rx<ContactDetailResponse> data = ContactDetailResponse().obs;
   final ContactDetailProvider _provider = ContactDetailProvider();
 
-  String id=Get.arguments[0];
+  String id="";
   @override
   void onReady() {
     super.onReady();
+    id=Get.arguments[0];
     getDetail();
+  }
+  @override
+  void onInit() {
+    // TODO: implement onInit
+    super.onInit();
+  }
+
+  @override
+  void onClose() {
+    // TODO: implement onClose
+    super.onClose();
   }
 
   void getDetail() async {

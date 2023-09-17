@@ -3,7 +3,7 @@ import 'package:contactbook/theme/text_theme.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-Widget participantItem(String name,Function() onRemove) {
+Widget participantItem(String name,Function() onRemove,[bool isDetail=false]) {
   return Card(
       color: primaryColor,
       shape: RoundedRectangleBorder(
@@ -16,6 +16,7 @@ Widget participantItem(String name,Function() onRemove) {
           mainAxisSize: MainAxisSize.min,
           children: [
             text_14_400(name,Colors.white),
+            !isDetail?
             GestureDetector(
               onTap: (){
                 onRemove();
@@ -24,7 +25,7 @@ Widget participantItem(String name,Function() onRemove) {
                 Icons.close,
                 color: Colors.white,
               ),
-            )
+            ):Container()
           ],
         ),
       ));

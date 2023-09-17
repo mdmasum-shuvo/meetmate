@@ -1,10 +1,10 @@
-import 'package:contactbook/app/modules/schedule_detail/model/Participent.dart';
+import 'package:contactbook/app/modules/schedule_detail/model/ScheduleDetailResponse.dart';
 import 'package:contactbook/theme/text_theme.dart';
 import 'package:flutter/cupertino.dart';
 
 import '../../../create_schedule/views/component/participant.dart';
 
-Widget participants(List<Participent> participent) {
+Widget participants(List<ParticipentList> participent) {
   return Column(
     crossAxisAlignment: CrossAxisAlignment.start,
     children: [
@@ -18,7 +18,7 @@ Widget participants(List<Participent> participent) {
         itemCount: participent.length,
         physics: NeverScrollableScrollPhysics(),
         itemBuilder: (context, index) {
-          return participantItem(participent[index].id.toString(), () {});
+          return participantItem(participent[index].clientName.toString(), () {},true);
         },
       )
     ],
