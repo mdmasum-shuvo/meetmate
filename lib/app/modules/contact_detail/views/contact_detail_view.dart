@@ -15,6 +15,7 @@ class ContactDetailView extends GetView<ContactDetailController> {
 
   @override
   Widget build(BuildContext context) {
+
     return Scaffold(
       appBar: customAppbarWidget("Contact Detail"),
       body: Padding(

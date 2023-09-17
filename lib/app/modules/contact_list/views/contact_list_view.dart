@@ -14,6 +14,7 @@ class ContactListView extends GetView<ContactListController> {
 
   @override
   Widget build(BuildContext context) {
+
     return Scaffold(
       appBar: mainAppBar("Contact List"),
       drawer: MainDrawer(),

@@ -1,6 +1,5 @@
 import 'package:contactbook/app/modules/contact_list/model/ContactListResponse.dart';
 import 'package:contactbook/app/routes/app_pages.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../../../../theme/colors.dart';
@@ -14,7 +13,7 @@ Widget contactItem(Data data) {
       padding: const EdgeInsets.only(bottom: 12),
       child: Card(
         shape: RoundedRectangleBorder(
-          side: BorderSide(color: Colors.white, width: 1),
+          side: const BorderSide(color: Colors.white, width: 1),
           borderRadius: BorderRadius.circular(16),
         ),
         child: Padding(
