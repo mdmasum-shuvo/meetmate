@@ -1,16 +1,16 @@
-import 'package:contactbook/app/modules/contact_detail/model/ContactDetailResponse.dart';
-import 'package:contactbook/app/modules/contact_detail/providers/contact_detail_provider.dart';
+import 'package:contactbook/app/modules/schedule_detail/model/Data.dart';
+import 'package:contactbook/app/modules/schedule_detail/providers/schedule_detail_provider.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:get/get.dart';
 
 import '../../../../theme/Colors.dart';
 import '../../../utils/snackbar.dart';
 
-class ContactDetailController extends GetxController {
-  //TODO: Implement ContactDetailController
+class ScheduleDetailController extends GetxController {
+  //TODO: Implement ScheduleDetailController
 
-  Rx<ContactDetailResponse> data = ContactDetailResponse().obs;
-  final ContactDetailProvider _provider = ContactDetailProvider();
+  Rx<Data?>? data = Data().obs;
+  final ScheduleDetailProvider _provider = ScheduleDetailProvider();
 
   String id=Get.arguments[0];
   @override
@@ -27,7 +27,7 @@ class ContactDetailController extends GetxController {
       print(RxStatus.success().toString());
       if (response.data != null) {
         EasyLoading.dismiss();
-        data.value = response;
+        data?.value = response.data!;
       } else {
         EasyLoading.dismiss();
         getxSnackbar("", "No Data Found!", red);
@@ -35,6 +35,4 @@ class ContactDetailController extends GetxController {
       }
     });
   }
-
-
 }

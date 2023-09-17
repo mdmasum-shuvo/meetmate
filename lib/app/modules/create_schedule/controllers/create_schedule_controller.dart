@@ -36,6 +36,7 @@ class CreateScheduleController extends GetxController {
   final ContactListProvider _contactProvider = ContactListProvider();
   final count = 0.obs;
   RxList<String> contactListStr = <String>[].obs;
+  RxList<String> participantStr = <String>[].obs;
   RxList<String> companyListStr = <String>[].obs;
 
   ContactListController contactListController = ContactListController();

@@ -9,7 +9,7 @@ import '../../../../utils/load_network_image.dart';
 
 Widget contactItem(Data data) {
   return GestureDetector(
-    onTap:()=>{Get.toNamed(Routes.CONTACT_DETAIL)} ,
+    onTap:()=>{Get.toNamed(Routes.CONTACT_DETAIL,arguments: [data.id.toString()])} ,
     child: Padding(
       padding: const EdgeInsets.only(bottom: 12),
       child: Card(

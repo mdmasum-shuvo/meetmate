@@ -16,6 +16,8 @@ import '../modules/my_schedule/bindings/my_schedule_binding.dart';
 import '../modules/my_schedule/views/my_schedule_view.dart';
 import '../modules/profile/bindings/profile_binding.dart';
 import '../modules/profile/views/profile_view.dart';
+import '../modules/schedule_detail/bindings/schedule_detail_binding.dart';
+import '../modules/schedule_detail/views/schedule_detail_view.dart';
 
 part 'app_routes.dart';
 
@@ -64,6 +66,11 @@ class AppPages {
       name: _Paths.CONTACT_DETAIL,
       page: () => const ContactDetailView(),
       binding: ContactDetailBinding(),
+    ),
+    GetPage(
+      name: _Paths.SCHEDULE_DETAIL,
+      page: () => const ScheduleDetailView(),
+      binding: ScheduleDetailBinding(),
     ),
   ];
 }

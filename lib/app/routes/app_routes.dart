@@ -11,6 +11,7 @@ abstract class Routes {
   static const CREATE_CONTACT = _Paths.CREATE_CONTACT;
   static const CREATE_SCHEDULE = _Paths.CREATE_SCHEDULE;
   static const CONTACT_DETAIL = _Paths.CONTACT_DETAIL;
+  static const SCHEDULE_DETAIL = _Paths.SCHEDULE_DETAIL;
 }
 
 abstract class _Paths {
@@ -23,4 +24,5 @@ abstract class _Paths {
   static const CREATE_CONTACT = '/create-contact';
   static const CREATE_SCHEDULE = '/create-schedule';
   static const CONTACT_DETAIL = '/contact-detail';
+  static const SCHEDULE_DETAIL = '/schedule-detail';
 }

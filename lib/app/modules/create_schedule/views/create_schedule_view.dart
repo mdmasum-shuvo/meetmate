@@ -1,14 +1,17 @@
 import 'dart:ffi';
 
+import 'package:contactbook/app/modules/create_schedule/views/component/participant.dart';
 import 'package:contactbook/app/routes/app_pages.dart';
 import 'package:contactbook/theme/dropdown.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rounded_date_picker/flutter_rounded_date_picker.dart';
+import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 
 import 'package:get/get.dart';
 
 import '../../../../theme/button_theme.dart';
 import '../../../../theme/custom_appbar.dart';
+import '../../../../theme/text_theme.dart';
 import '../../../../theme/textfield.dart';
 import '../controllers/create_schedule_controller.dart';
 
@@ -25,37 +28,10 @@ class CreateScheduleView extends GetView<CreateScheduleController> {
           children: [
             SingleChildScrollView(
               child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   textField(
                       "Title", "enter client name", controller.titleController),
-                  dropDown("Company Name", "", controller.companyListStr,
-                      (String value) {
-                    controller.settingController
-                        .getSelectedIdFromCompany(value);
-                    print("company name: $value");
-                  }),
-                  dropDown("Client Name", "", controller.contactListStr,
-                      (String value) {
-                    controller.contactListController
-                        .getSelectedIdFromContactList(value);
-                  }),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      primaryButtonWithIcon("New Contact", Icons.add,
-                          () => Get.toNamed(Routes.CREATE_CONTACT), 24),
-                      const SizedBox(
-                        width: 4,
-                      ),
-                      Expanded(
-                        child: primaryButtonWhiteWithIcon("Add Participant",
-                            Icons.person_add_outlined, () => null, 24),
-                      )
-                    ],
-                  ),
-                  const SizedBox(
-                    height: 12,
-                  ),
                   dateField("Date", "enter date", controller.viewDateFormat,
                       () async {
                     print("click date clocik date");
@@ -119,6 +95,38 @@ class CreateScheduleView extends GetView<CreateScheduleController> {
                   }),
                   textField("Agenda", "enter meeting agenda",
                       controller.agendaController),
+                  Obx(
+                    () => controller.participantStr.isNotEmpty
+                        ? Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+
+                              text_14_700("Participants"),
+                              SizedBox(height: 12,),
+                              ListView.builder(
+                                itemCount:
+                                    controller.participantStr.value.length,
+                                shrinkWrap: true,
+                                physics: NeverScrollableScrollPhysics(),
+                                itemBuilder: (context, index) {
+                                  return participantItem(
+                                      controller.participantStr.value[index],
+                                      () {
+                                        controller.participantStr.removeAt(index);
+                                      });
+                                },
+                              ),
+                              SizedBox(height: 12,),
+                            ],
+                          )
+                        : Container(),
+                  ),
+
+
+                  dropDown("Client Name", "Select Client Name",
+                      controller.contactListStr, (String value) {
+                    controller.participantStr.add(value);
+                  }),
                   const SizedBox(
                     height: 60,
                   )
