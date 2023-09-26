@@ -100,7 +100,6 @@ class CreateScheduleView extends GetView<CreateScheduleController> {
                         ? Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-
                               text_14_700("Participants"),
                               SizedBox(height: 12,),
                               ListView.builder(
@@ -135,7 +134,7 @@ class CreateScheduleView extends GetView<CreateScheduleController> {
             ),
             Align(
                 alignment: Alignment.bottomRight,
-                child: primaryButton("Save", () => controller.setParticipantId()))
+                child: primaryButton("Save", () => controller.createSchedule()))
           ],
         ),
       ),

@@ -30,7 +30,7 @@ class CreateScheduleController extends GetxController {
   RxString selectedEndTimeStr = "".obs;
   TextEditingController textEditingController = TextEditingController();
   final CreateScheduleProvider _provider = CreateScheduleProvider();
-
+  String idString="";
   //Rx<ContactListResponse> contactList = ContactListResponse(data: List.empty()).obs;
   Rx<ContactListResponse> list = ContactListResponse(data: List.empty()).obs;
   final ContactListProvider _contactProvider = ContactListProvider();
@@ -81,7 +81,7 @@ class CreateScheduleController extends GetxController {
       return;
     }
 
-    setParticipantId();
+    //setParticipantId();
 
     Map<String, String?> qParams = {
       'title': titleController.text.toString(),
@@ -92,8 +92,9 @@ class CreateScheduleController extends GetxController {
       'meeting_link': meetingLinkController.text.toString(),
       'piroty': settingController.selectedPriorityId.value,
       'agenda': agendaController.text.toString(),
-      'particepents': "1,2"
+      'particepents': setParticipantId()
     };
+    print(qParams);
     EasyLoading.show();
     _provider.createSchedule(qParams).then((response) async {
       print(RxStatus.success().toString());
@@ -108,27 +109,7 @@ class CreateScheduleController extends GetxController {
     });
   }
 
-  void getList() async {
-    EasyLoading.show();
 
-    _contactProvider.getContactList().then((response) async {
-      print(RxStatus.success().toString());
-      if (response.data != null) {
-        EasyLoading.dismiss();
-        list.value = response;
-        convertContactList();
-      } else {
-        EasyLoading.dismiss();
-        getxSnackbar("", "No Data Found!", red);
-      }
-    });
-  }
-
-  void convertContactList() {
-    for (int i = 0; i < list.value.data!.length; i++) {
-      contactListStr.add(list.value.data![i].clientName ?? "");
-    }
-  }
 
   void changeDateformate(DateTime newDateTime) {
     String viewDate = DateFormat.yMMMd().format(newDateTime);
@@ -150,18 +131,22 @@ class CreateScheduleController extends GetxController {
     return DateFormat("HH:mm").format(date);
   }
 
-  void setParticipantId() {
+  String setParticipantId() {
+    participantId.clear();
     print("participants${participantId.toString()}");
-
     for (int i = 0; i < contactListController.list.value.data!.length; i++) {
       for (int j = 0; j < participantStr.length; j++) {
-        if (contactListController.list.value.data![i].clientName! ==
-            participantStr[j]) {
+        if (contactListStr[i] == participantStr[j]) {
           participantId
               .add(contactListController.list.value.data![i].id.toString());
           print("participants${participantId.toString()}");
         }
       }
     }
+    String idString= participantId.toString().replaceAll("[", "");
+    idString=idString.replaceAll("]", "").removeAllWhitespace;
+    print("participants String $idString");
+
+    return idString;
   }
 }

@@ -49,37 +49,37 @@ final TextTheme textTheme1 = TextTheme(
   headlineLarge: GoogleFonts.poppins(
       fontSize: 18.sp,
       fontWeight: FontWeight.w800,
-      color: primaryDarkColor),
+      color: textColor),
   headlineMedium: GoogleFonts.poppins(
       fontSize: 16.sp,
       fontWeight: FontWeight.w700,
-      color: primaryDarkColor),
+      color: textColor),
   headlineSmall:
   GoogleFonts.poppins(fontSize: 16.sp, fontWeight: FontWeight.w400,color: primaryDarkColor),
 
   titleLarge: GoogleFonts.poppins(
       fontSize: 16.sp,
       fontWeight: FontWeight.w600,
-      color: primaryDarkColor),
+      color: textColor),
   titleMedium: GoogleFonts.poppins(
       fontSize: 14.sp,
       fontWeight: FontWeight.normal,
-      color: primaryDarkColor),
+      color: textColor),
   titleSmall: GoogleFonts.poppins(
       fontSize: 16.sp,
       fontWeight: FontWeight.w400,
-      color: primaryDarkColor),
+      color: textColor),
   bodyLarge: GoogleFonts.poppins(
       fontSize: 12.sp,
       fontWeight: FontWeight.w400,
-      color: primaryDarkColor),
+      color: textColor),
   bodyMedium: GoogleFonts.poppins(
       fontSize: 10.sp,
-      color: primaryDarkColor),
+      color: textColor),
 
   bodySmall: GoogleFonts.poppins(
       fontSize: 10.sp,
-      color: primaryDarkColor),
+      color: textColor),
 
 );
 

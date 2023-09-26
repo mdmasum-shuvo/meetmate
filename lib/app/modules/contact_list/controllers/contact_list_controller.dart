@@ -50,7 +50,7 @@ class ContactListController extends GetxController {
   void convertContactList() {
     for (int i = 0; i < list.value.data!.length; i++) {
       int number=i+1;
-      contactListStr.add( "${number}. ${list.value.data![i].clientName}(${list.value.data![i].company})");
+      contactListStr.add( "$number. ${list.value.data![i].clientName}(${list.value.data![i].designation})");
     }
   }
 

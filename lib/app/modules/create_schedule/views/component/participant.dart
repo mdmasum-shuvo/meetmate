@@ -7,7 +7,7 @@ Widget participantItem(String name,Function() onRemove,[bool isDetail=false]) {
   return Card(
       color: primaryColor,
       shape: RoundedRectangleBorder(
-        side: BorderSide(color: primaryDarkColor, width: 1),
+        side: const BorderSide(color: primaryDarkColor, width: 1),
         borderRadius: BorderRadius.circular(16),
       ),
       child: Padding(
@@ -21,7 +21,7 @@ Widget participantItem(String name,Function() onRemove,[bool isDetail=false]) {
               onTap: (){
                 onRemove();
               },
-              child: Icon(
+              child: const Icon(
                 Icons.close,
                 color: Colors.white,
               ),
